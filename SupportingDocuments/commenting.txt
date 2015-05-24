@@ -1,0 +1,47 @@
+Don't forget to put comments in your code. Portion of score will be allocated for the comments. You know, readable comments will help our program be more re-usable.
+ 
+At the top of any class, you should have the following comment:
+ 
+/**
+* This class represent Customer
+*
+* @author  Matthew
+* @version 1.0
+* @since   2015-05-20
+*/
+ 
+ 
+and before attributes, constructors, accessors, mutators, business logic and other methods, you should put the below comment/heading:
+ 
+//------------
+// Attributes.
+//------------
+ 
+//----------------
+// Constructor(s).
+//----------------
+ 
+//----------------------------------
+// Accessor/Mutator methods.
+//----------------------------------
+ 
+ 
+//-----------------------------
+// Business logic methods.
+//-----------------------------
+ 
+ 
+//------------------------------------
+// Miscellaneous other methods.
+//------------------------------------
+ 
+ 
+Business logic method are methods implementing the business rule/logic of the problem, for example:
+ 
+               public boolean hasPrerequisites() {
+                              if (prerequisites.size() > 0) return true;
+                              else return false;
+               }
+ 
+ 
+Printing/displaying methods can be put in the Miscellaneous other methods.
