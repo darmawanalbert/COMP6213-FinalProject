@@ -1,0 +1,28 @@
+When you develop GUI for your final project, you may want to use multi-windows. For example, having two users: Customers and Administrator, may motivate you to create multi-windows GUI. The first window may  ask the user to do the login. Having indentified the user, a new window can pop up for the Administrator to add/edit/delete data, while another windows can be used to do Customer tasks.
+
+There are two potential problems when we create multi-windows GUI. Firstly, how the data or objects can be accessed across the windows. Secondly,  how the coordination of event handling works.  In many cases, these two problems can cause your GUI program to generate errors, notably null pointers.  In order to avoid such errors, precautions  should be made prior or during writing the codes.
+
+The problem of sharing data or object across windows can be easily solved by creating static variables declared in the class containing the main function.
+
+public class SRS {
+        public static ArrayList<Student> students;
+        public static ArrayList<Course > courses;
+        public static ArrayList<Professor> professors;
+
+
+        public static void main(String[] args) {
+
+                // initialize the Objects
+                students = SRSDataAccess.initializeStudent();
+                courses = SRSDataAccess.initializeCourse();
+                professors = SRSDataAccess.initializeProfessor();
+
+                new MainWindow();
+
+        }
+
+}
+
+By declaring the data or objects as public and static, any window can access this data by calling SRS.students, etc.
+
+The second potential problem in which a window can spawn another window is best solved by making the primary window as an object of JFrame  and the secondary window as an object of JDialog. We make make the JDialog as  modal or non-modal. A non-modal JDialog will ensure that when we close the JDialog, the JFrame will remain running.
