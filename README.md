@@ -4,10 +4,10 @@ This is a simple Book Store Program for COMP6213- Object Oriented Programming Cl
 ----------------------------------------------------------------------------------------------------------------------
 
 Suggestions
-1. Class’ method should primarily manipulate class’ attribute (object oriented design principle)
-2. Add comments (refer to SupportingDocuments/commenting.txt)
-3. Look at the Guidelines about the steps needed to be done (refer to SupportingDocuments/Guide.pdf)
-4. Look at the example provided by Mr. Tri (I already forward it to you guys, check your email)
+- Class’ method should primarily manipulate class’ attribute (object oriented design principle)
+- Add comments (refer to SupportingDocuments/commenting.txt)
+- Look at the Guidelines about the steps needed to be done (refer to SupportingDocuments/Guide.pdf)
+- Look at the example provided by Mr. Tri (I already forward it to you guys, check your email)
 
 -----------------------------------------------------------------------------------------------------------------------
 
