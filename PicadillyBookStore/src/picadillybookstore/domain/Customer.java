@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 public class Customer extends User{
     //------------
+    // Constant(s).
+    //------------
+    public final int NUMBER_OF_CREDIT_CARD_SUBSTRING = 4;
+    //------------
     // Attributes.
     //------------
     private int numberOfPurchase;
@@ -26,6 +30,7 @@ public class Customer extends User{
     //----------------
     // Constructor(s).
     //----------------
+    private String getZipCode;
 
     /**
      *
@@ -169,10 +174,37 @@ public class Customer extends User{
     // Miscellaneous other methods.
     //------------------------------------
 
+    public void display()
+    {
+        System.out.println("Personal Information");
+        System.out.println("--------------------");
+        System.out.println("Name : " + this.getName());
+        System.out.println("User ID :" + this.getUserId());
+        System.out.println("Gender : " + this.getGender());
+        System.out.println("Username : " + this.getUsername());
+        System.out.println("Email : " + this.getEmail());
+        System.out.println("Phone Number : " + this.getPhoneNumber());
+        System.out.println("Number of Purchase : " + this.getNumberOfPurchase());
+        System.out.println("Address : " + this.getStreetAddress() + "\n\t  " + this.getCity() + " , "+ this.getZipCode() + "\n\t  " + this.getCountry());
+        System.out.println("");
+        System.out.println("Credit Card Information");
+        System.out.println("--------------------");
+        System.out.println("Name : " + this.getCreditCardName());
+        System.out.print("No : ");
+        for (int loopCounter=0;loopCounter<NUMBER_OF_CREDIT_CARD_SUBSTRING;loopCounter++)
+        {
+            System.out.print(this.getCreditCardNo().substring(loopCounter*NUMBER_OF_CREDIT_CARD_SUBSTRING,(loopCounter*NUMBER_OF_CREDIT_CARD_SUBSTRING)+NUMBER_OF_CREDIT_CARD_SUBSTRING));
+            if (loopCounter!=NUMBER_OF_CREDIT_CARD_SUBSTRING-1)
+            {
+                System.out.print("-");
+            }
+        }
+        System.out.println("");
+        System.out.println("Expired Date : " + this.getCreditCardMonth() + "/" + this.getCreditCardYear());
+        
+        System.out.println("");
+        System.out.println("");
+      
+    }
 
-
-
-    
-
-    
 }

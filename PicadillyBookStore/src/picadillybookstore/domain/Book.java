@@ -8,7 +8,7 @@ package picadillybookstore.domain;
  */
 
 import java.util.ArrayList;
-
+import java.util.List;
 public class Book {
     //------------
     // Attributes.
@@ -23,13 +23,13 @@ public class Book {
     String description;
     Binding binding;
     Signed signed;
-    ArrayList<String> keywords = new ArrayList<>();
-    ArrayList<String> category = new ArrayList<>(); 
+    List keywords = new ArrayList();
+    List category = new ArrayList(); 
     
     //----------------
     // Constructor(s).
     //----------------
-    public Book(String author, String title, String isbn, long price, long quantity, String publisherName, int yearPublished, String description, Binding binding, Signed signed, ArrayList<String> keywords, ArrayList<String> category) {
+    public Book(String author, String title, String isbn, long price, long quantity, String publisherName, int yearPublished, String description, Binding binding, Signed signed, List keywords, List category) {
         this.author = author;
         this.title = title;
         this.isbn = isbn;
@@ -87,13 +87,15 @@ public class Book {
         return signed;
     }
 
-    public ArrayList<String> getKeywords() {
+    public List getKeywords() {
         return keywords;
     }
 
-    public ArrayList<String> getCategory() {
+    public List getCategory() {
         return category;
     }
+
+   
 
     //----------------------------------
     // Mutator methods.
@@ -138,14 +140,13 @@ public class Book {
         this.signed = signed;
     }
     
-    public void setKeywords(ArrayList<String> keywords) {
+    public void setKeywords(List keywords) {
         this.keywords = keywords;
     }
-    
-    public void setCategory(ArrayList<String> category) {
+
+    public void setCategory(List category) {
         this.category = category;
     }
-    
     //-----------------------------
     // Business logic methods.
     //-----------------------------
@@ -154,4 +155,48 @@ public class Book {
     //------------------------------------
     // Miscellaneous other methods.
     //------------------------------------
+
+    public void display()
+    {
+        String element;
+        int keywordsCounter;
+        int categoryCounter;
+        System.out.println("Title : " + this.getTitle());
+        System.out.println("Author : " + this.getAuthor());
+        System.out.println("ISBN : " + this.getIsbn());
+        System.out.println("Price : Rp. " + this.getPrice());
+        System.out.println("Quantity : " + this.getQuantity());
+        System.out.println("Publisher Name : " + this.getPublisherName());
+        System.out.println("Year Published : " + this.getYearPublished());
+        System.out.println("Description : " + this.getDescription());
+        System.out.println("Binding : " + this.getBinding());
+        System.out.println("Signed : " + this.getSigned());
+        System.out.print("Keywords : ");
+        keywordsCounter =0;
+        for(Object object : keywords) {
+            keywordsCounter+=1;
+            element = (String) object;
+            System.out.print(element);
+            if (keywordsCounter!=this.keywords.size())
+            {
+                System.out.print(" , ");
+            }
+        }
+        System.out.println("");
+        
+        System.out.print("Category : ");
+        categoryCounter=0;
+        for(Object object : category) {
+            categoryCounter+=1;
+            element = (String) object;
+            System.out.print(element);
+            if (categoryCounter!=this.category.size())
+            {
+                System.out.print(" , ");
+            }
+        }
+        System.out.println("");
+        System.out.println("");
+    
+    }
 }
