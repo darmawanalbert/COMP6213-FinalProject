@@ -94,7 +94,22 @@ public class Transaction{
     //------------------------------------
     public void display()
     {
-        
+        System.out.println("Transaction ID       : " + this.getTransactionId());
+        System.out.println("Customer ID          : " + this.getCustomerId());
+        System.out.println("Custoner Name        : " + this.getTransactionId());
+        System.out.println("ISBN                 : " + this.getIsbn());
+        System.out.println("Quantity             : " + this.getQuantity());
+        System.out.println("Date                 : " + this.getDate());
+        System.out.print("Payment Verification : ");
+        if(this.isPaymentVerification()==true) 
+        {
+            System.out.println("Verified");
+        }
+        else 
+        {
+            System.out.println("Not verified");
+        }
+        System.out.println("");
     }
     
 }

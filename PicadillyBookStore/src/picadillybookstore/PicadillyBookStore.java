@@ -90,7 +90,7 @@ public class PicadillyBookStore {
        
         // Displaying Customer List
         System.out.println("================================================================");
-        System.out.println("                           Customer List");
+        System.out.println("                          Customer List");
         System.out.println("================================================================");
         
         for (Customer eachCustomer : customerList) {
@@ -108,21 +108,26 @@ public class PicadillyBookStore {
         
         // Customers start to purchase books
         System.out.println("================================================================");
-        System.out.println("                           Book Purchasing");
+        System.out.println("                       Book Purchasing");
         System.out.println("================================================================");
         attemptToPurchaseBook(c1,b1);
         attemptToPurchaseBook(c2,b2);
        
         // Transaction History
         System.out.println("================================================================");
-        System.out.println("                           Transaction History");
+        System.out.println("                     Transaction History");
         System.out.println("================================================================");
-        
+    
+        for (Transaction eachTransaction : transactionHistory) {
+             eachTransaction.display();
+        } 
     }
+    
     private static void attemptToPurchaseBook(Customer customerInvolved, Book bookInvolved)
     {
         Transaction currentTransaction;
         Date currentDate;
+        
         System.out.println(customerInvolved.getName()+" is trying to buy \"" + bookInvolved.getTitle() + "\"");
         PurchaseStatus thisPurchaseStatus = customerInvolved.purchaseBook(bookInvolved);
         System.out.println(thisPurchaseStatus.value());
