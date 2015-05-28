@@ -41,89 +41,91 @@ public class Book {
     }
     
     //----------------------------------
-    // Accessor/Mutator methods.
+    // Accessor methods.
     //----------------------------------
-
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getIsbn() {
         return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public long getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
     public long getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
     }
 
     public String getPublisherInfo() {
         return publisherInfo;
     }
 
-    public void setPublisherInfo(String publisherInfo) {
-        this.publisherInfo = publisherInfo;
-    }
-
     public int getYearPublished() {
         return yearPublished;
-    }
-
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public ArrayList<String> getKeywords() {
         return keywords;
-    }
-
-    public void setKeywords(ArrayList<String> keywords) {
-        this.keywords = keywords;
     }
 
     public ArrayList<String> getCategory() {
         return category;
     }
 
+    //----------------------------------
+    // Mutator methods.
+    //----------------------------------
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    
+    public void setPrice(long price) {
+        this.price = price;
+    }
+    
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+    
+    public void setPublisherInfo(String publisherInfo) {
+        this.publisherInfo = publisherInfo;
+    }
+    
+    public void setYearPublished(int yearPublished) {
+        this.yearPublished = yearPublished;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public void setKeywords(ArrayList<String> keywords) {
+        this.keywords = keywords;
+    }
+    
     public void setCategory(ArrayList<String> category) {
         this.category = category;
     }
-
+    
     //-----------------------------
     // Business logic methods.
     //-----------------------------

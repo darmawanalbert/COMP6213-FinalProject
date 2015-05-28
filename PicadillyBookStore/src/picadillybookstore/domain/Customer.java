@@ -6,11 +6,13 @@ package picadillybookstore.domain;
 * @version 1.0
 * @since   2015-05-26
 */
+import java.util.ArrayList;
+
 public class Customer extends User{
     //------------
     // Attributes.
     //------------
-    private int numberOfOrder;
+    private int numberOfPurchase;
     private String streetAddress;
     private String city;
     private String zipCode;
@@ -20,6 +22,7 @@ public class Customer extends User{
     private String cvc;
     private String creditCardMonth;
     private String creditCardYear;
+    ArrayList<Book> purchasedBook = new ArrayList<>();
     //----------------
     // Constructor(s).
     //----------------
@@ -33,7 +36,7 @@ public class Customer extends User{
      * @param password
      * @param email
      * @param phoneNumber
-     * @param numberOfOrder
+     * @param numberOfPurchase
      * @param streetAddress
      * @param city
      * @param zipCode
@@ -43,16 +46,17 @@ public class Customer extends User{
      * @param cvc
      * @param creditCardMonth
      * @param creditCardYear
+     * @param purchasedBook
      */
      public Customer(long userId, String name, 
                 Gender gender, String username, 
                 String password, String email, 
-                String phoneNumber, int numberOfOrder, String streetAddress,
+                String phoneNumber, int numberOfPurchase, String streetAddress,
                 String city, String zipCode, String country, String creditCardName,
-                String creditCardNo, String cvc, String creditCardMonth, String creditCardYear)
+                String creditCardNo, String cvc, String creditCardMonth, String creditCardYear, ArrayList<Book> purchasedBook)
     {
         super(userId,name,gender,username,password,email,phoneNumber);
-        this.setNumberOfOrder(numberOfOrder);
+        this.setNumberOfPurchase(numberOfPurchase);
         this.setStreetAddress(streetAddress);
         this.setCity(city);
         this.setZipCode(zipCode);
@@ -62,13 +66,14 @@ public class Customer extends User{
         this.setCvc(cvc);
         this.setCreditCardMonth(creditCardMonth);
         this.setCreditCardYear(creditCardYear);
+        this.setPurchasedBook(purchasedBook);
                 
     }
     //----------------------------------
     // Accessor methods.
     //----------------------------------
-    public int getNumberOfOrder() {
-        return numberOfOrder;
+    public int getNumberOfPurchase() {
+        return numberOfPurchase;
     }
 
     public String getStreetAddress() {
@@ -106,12 +111,16 @@ public class Customer extends User{
     public String getCreditCardYear() {
         return creditCardYear;
     }
-
+    
+    public ArrayList<Book> getPurchasedBook() {
+        return purchasedBook;
+    }    
+    
     //----------------------------------
     // Mutator methods.
     //----------------------------------
-    public void setNumberOfOrder(int numberOfOrder) {
-        this.numberOfOrder = numberOfOrder;
+    public void setNumberOfPurchase(int numberOfPurchase) {
+        this.numberOfPurchase = numberOfPurchase;
     }
 
     public void setStreetAddress(String streetAddress) {
@@ -149,7 +158,11 @@ public class Customer extends User{
     public void setCreditCardYear(String creditCardYear) {
         this.creditCardYear = creditCardYear;
     } 
-     
+    
+    public void setPurchasedBook(ArrayList<Book> purchasedBook) {
+        this.purchasedBook = purchasedBook;
+    }
+    
     //-----------------------------
     // Business logic methods.
     //-----------------------------
@@ -158,6 +171,9 @@ public class Customer extends User{
     //------------------------------------
     // Miscellaneous other methods.
     //------------------------------------
+
+
+
 
     
 
