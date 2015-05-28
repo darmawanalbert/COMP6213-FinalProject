@@ -54,7 +54,7 @@ public class PicadillyBookStore {
         bookCatalog.add(b3);
         
         // Defining 2 customers
-        c1 = new Customer((long) 1, "Albert Darmawan", Gender.MALE, "darmawanalbert", "123456", "darmawanalbert@gmail.com", "081281123450", 0, "Jalan Citandui 1 Taman Tirta Golf", "Tangerang Selatan", "15310", "Indonesia", "Albert Darmawan", "0000105623403209", "145", "05", "18");
+        c1 = new Customer((long) 1, "Albert Darmawan", Gender.MALE, "darmawanalbert", "123456", "darmawanalbert@gmail.com", "081281123450", 0, "Jalan Citandui 1 Taman Tirta Golf", "Tangerang Selatan", "15310", "Indonesia", "Albert Darmawan", "1010202010101010", "145", "05", "18");
         c2 = new Customer((long) 2, "Matthew Kharli", Gender.MALE, "matthewk", "098765", "matthewk@gmail.com", "08119001771", 0, "715 Slater Avenue", "Pleasant Hill", "94523", "USA", "Matthew Kharli", "1010001011110100", "010", "10", "10");
         
         // Adding 2 customers to Customer array list
