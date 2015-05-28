@@ -46,14 +46,13 @@ public class Customer extends User{
      * @param cvc
      * @param creditCardMonth
      * @param creditCardYear
-     * @param purchasedBook
      */
      public Customer(long userId, String name, 
                 Gender gender, String username, 
                 String password, String email, 
                 String phoneNumber, int numberOfPurchase, String streetAddress,
                 String city, String zipCode, String country, String creditCardName,
-                String creditCardNo, String cvc, String creditCardMonth, String creditCardYear, ArrayList<Book> purchasedBook)
+                String creditCardNo, String cvc, String creditCardMonth, String creditCardYear)
     {
         super(userId,name,gender,username,password,email,phoneNumber);
         this.setNumberOfPurchase(numberOfPurchase);
@@ -65,9 +64,7 @@ public class Customer extends User{
         this.setCreditCardNo(creditCardNo);
         this.setCvc(cvc);
         this.setCreditCardMonth(creditCardMonth);
-        this.setCreditCardYear(creditCardYear);
-        this.setPurchasedBook(purchasedBook);
-                
+        this.setCreditCardYear(creditCardYear);           
     }
     //----------------------------------
     // Accessor methods.

@@ -18,24 +18,28 @@ public class Book {
     String isbn;
     long price;
     long quantity;
-    String publisherInfo;
+    String publisherName;
     int yearPublished;
     String description;
+    Binding binding;
+    Signed signed;
     ArrayList<String> keywords = new ArrayList<>();
     ArrayList<String> category = new ArrayList<>(); 
     
     //----------------
     // Constructor(s).
     //----------------
-    public Book(String author, String title, String isbn, long price, long quantity, String publisherInfo, int yearPublished, String description, ArrayList<String> keywords, ArrayList<String> category) {
+    public Book(String author, String title, String isbn, long price, long quantity, String publisherName, int yearPublished, String description, Binding binding, Signed signed, ArrayList<String> keywords, ArrayList<String> category) {
         this.author = author;
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.quantity = quantity;
-        this.publisherInfo = publisherInfo;
+        this.publisherName = publisherName;
         this.yearPublished = yearPublished;
         this.description = description;
+        this.binding = binding;
+        this.signed = signed;
         this.keywords = keywords;
         this.category = category;
     }
@@ -63,8 +67,8 @@ public class Book {
         return quantity;
     }
 
-    public String getPublisherInfo() {
-        return publisherInfo;
+    public String getPublisherName() {
+        return publisherName;
     }
 
     public int getYearPublished() {
@@ -73,6 +77,14 @@ public class Book {
 
     public String getDescription() {
         return description;
+    }
+
+    public Binding getBinding() {
+        return binding;
+    }
+
+    public Signed getSigned() {
+        return signed;
     }
 
     public ArrayList<String> getKeywords() {
@@ -106,8 +118,8 @@ public class Book {
         this.quantity = quantity;
     }
     
-    public void setPublisherInfo(String publisherInfo) {
-        this.publisherInfo = publisherInfo;
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
     
     public void setYearPublished(int yearPublished) {
@@ -116,6 +128,14 @@ public class Book {
     
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setBinding(Binding binding) {
+        this.binding = binding;
+    }
+
+    public void setSigned(Signed signed) {
+        this.signed = signed;
     }
     
     public void setKeywords(ArrayList<String> keywords) {
