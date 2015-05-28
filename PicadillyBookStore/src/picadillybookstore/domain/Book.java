@@ -161,17 +161,17 @@ public class Book {
         String element;
         int keywordsCounter;
         int categoryCounter;
-        System.out.println("Title: " + this.getTitle());
-        System.out.println("Author: " + this.getAuthor());
-        System.out.println("ISBN: " + this.getIsbn());
-        System.out.println("Price: Rp. " + this.getPrice());
-        System.out.println("Quantity: " + this.getQuantity());
+        System.out.println("Title          : " + this.getTitle());
+        System.out.println("Author         : " + this.getAuthor());
+        System.out.println("ISBN           : " + this.getIsbn());
+        System.out.println("Price          : Rp. " + this.getPrice());
+        System.out.println("Quantity       : " + this.getQuantity());
         System.out.println("Publisher Name : " + this.getPublisherName());
         System.out.println("Year Published : " + this.getYearPublished());
-        System.out.println("Description: " + this.getDescription());
-        System.out.println("Binding: " + this.getBinding());
-        System.out.println("Signed: " + this.getSigned());
-        System.out.print("Keywords: ");
+        System.out.println("Description    : " + this.getDescription());
+        System.out.println("Binding        : " + this.getBinding());
+        System.out.println("Signed         : " + this.getSigned());
+        System.out.print("Keywords       : ");
         keywordsCounter =0;
         for(Object object : keywords) {
             keywordsCounter+=1;
@@ -184,7 +184,7 @@ public class Book {
         }
         System.out.println("");
         
-        System.out.print("Category: ");
+        System.out.print("Category       : ");
         categoryCounter=0;
         for(Object object : category) {
             categoryCounter+=1;
