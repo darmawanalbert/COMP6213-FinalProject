@@ -10,8 +10,6 @@ import java.util.Date;
 public class Transaction{
     
  
-    
-
     //------------
     // Attributes.
     //------------
@@ -21,11 +19,21 @@ public class Transaction{
     private long quantity;
     private Date date;
     public boolean paymentVerification;
+ 
     
     //----------------
     // Constructor(s).
     //----------------
+    public Transaction(long transactionId, long customerId, String isbn, long quantity, Date date, boolean paymentVerification) {
+        this.transactionId = transactionId;
+        this.customerId = customerId;
+        this.isbn = isbn;
+        this.quantity = quantity;
+        this.date = date;
+        this.paymentVerification = paymentVerification;
+    }    
     
+
     //----------------------------------
     // Accessor methods.
     //----------------------------------
@@ -54,7 +62,6 @@ public class Transaction{
     //----------------------------------
     // Mutator methods.
     //----------------------------------
-    
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
@@ -76,6 +83,7 @@ public class Transaction{
         this.paymentVerification = paymentVerification;
     }
  
+    
     //-----------------------------
     // Business logic methods.
     //-----------------------------
