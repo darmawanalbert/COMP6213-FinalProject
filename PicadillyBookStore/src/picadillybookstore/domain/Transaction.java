@@ -1,25 +1,34 @@
 package picadillybookstore.domain;
 
 import java.util.Date;
-
 /**
  *
- * @author RAZER
+ * @author Matthew Kharli
+ * @version 1.0
+ * @since 2015-5-28
  */
 public class Transaction{
-    //Attributes
+    
+ 
+    
+
+    //------------
+    // Attributes.
+    //------------
     private long transactionId;
     private long customerId;
     private String isbn;
     private long quantity;
     private Date date;
-    public boolean paymentVerification(){
-        if()
+    public boolean paymentVerification;
     
-        else
-            }
+    //----------------
+    // Constructor(s).
+    //----------------
     
-   //Accessor
+    //----------------------------------
+    // Accessor methods.
+    //----------------------------------
     public long getTransactionId(){
         return transactionId;
     }
@@ -32,7 +41,20 @@ public class Transaction{
     public long getQuantity(){
         return quantity;
     }
-    //Mutator
+
+    public Date getDate() {
+        return (Date) this.date.clone();
+    }
+    
+    public boolean isPaymentVerification() {
+        return paymentVerification;
+    }
+    
+    
+    //----------------------------------
+    // Mutator methods.
+    //----------------------------------
+    
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
@@ -45,6 +67,24 @@ public class Transaction{
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
+
+    public void setDate(Date date) {
+        this.date = (Date) date.clone();
+    }
+    
+    public void setPaymentVerification(boolean paymentVerification) {
+        this.paymentVerification = paymentVerification;
+    }
  
+    //-----------------------------
+    // Business logic methods.
+    //-----------------------------
+
+
+    //------------------------------------
+    // Miscellaneous other methods.
+    //------------------------------------
+
+    
 }
  
