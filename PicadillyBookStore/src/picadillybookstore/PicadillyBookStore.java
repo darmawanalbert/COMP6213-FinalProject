@@ -144,5 +144,4 @@ public class PicadillyBookStore {
         transactionHistory.add(currentTransaction);
         System.out.println("");
     }
-    
 }

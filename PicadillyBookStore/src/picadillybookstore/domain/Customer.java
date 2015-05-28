@@ -190,6 +190,7 @@ public class Customer extends User{
         }
         return (sum % 10 == 0);
     }
+    
     public PurchaseStatus purchaseBook(Book bookBeingPurchased)
     {
         Calendar currentTime = Calendar.getInstance();
@@ -211,8 +212,6 @@ public class Customer extends User{
             {
                 return PurchaseStatus.creditCardInvalid;
             }
-
-
         }
         else {
             return PurchaseStatus.noStock;
@@ -254,7 +253,5 @@ public class Customer extends User{
         
         System.out.println("");
         System.out.println("");
-      
     }
-
 }
