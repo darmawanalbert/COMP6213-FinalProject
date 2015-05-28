@@ -2,6 +2,7 @@ package picadillybookstore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import picadillybookstore.domain.Admin;
 import picadillybookstore.domain.Binding;
@@ -11,6 +12,7 @@ import picadillybookstore.domain.Gender;
 import picadillybookstore.domain.Signed;
 import picadillybookstore.domain.Transaction;
 import picadillybookstore.domain.User;
+import picadillybookstore.domain.PurchaseStatus;
 
 /**
 * This class is the container of main function
@@ -26,11 +28,19 @@ public class PicadillyBookStore {
         public static ArrayList<Book> bookCatalog;
         public static ArrayList<Customer> customerList;
         public static ArrayList<Admin> adminList;
+        public static ArrayList<Transaction> transactionHistory;
+        public static int numberOfTransaction = 0;
         
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Book b1, b2, b3;
         Customer c1, c2;
         Admin a1, a2;
+        
+        
         
         // Defining 3 books
         b1 = new Book("George Berkowski", "How to Build A Billion Dollar App", "978-0-349-40137-9", (long) 246221, (long) 5, "Little, Brown Book Group", 2015, "An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start", Binding.PAPERBACK, Signed.NOTSIGNED, Arrays.asList("app", "business", "startup", "technology", "mobile"), Arrays.asList("business"));
@@ -60,6 +70,9 @@ public class PicadillyBookStore {
         adminList = new ArrayList<>();
         adminList.add(a1);
         adminList.add(a2);
+        
+        // Creating Transaction array List
+        transactionHistory = new ArrayList<>();
         
         // Output
         System.out.println("================================================================");
@@ -93,9 +106,38 @@ public class PicadillyBookStore {
              eachAdmin.display();
         } 
         
+        // Customers start to purchase books
+        System.out.println("================================================================");
+        System.out.println("                           Book Purchasing");
+        System.out.println("================================================================");
+        attemptToPurchaseBook(c1,b1);
+        attemptToPurchaseBook(c2,b2);
+       
+        // Transaction History
+        System.out.println("================================================================");
+        System.out.println("                           Transaction History");
+        System.out.println("================================================================");
         
-       
-       
+    }
+    private static void attemptToPurchaseBook(Customer customerInvolved, Book bookInvolved)
+    {
+        Transaction currentTransaction;
+        Date currentDate;
+        System.out.println(customerInvolved.getName()+" is trying to buy \"" + bookInvolved.getTitle() + "\"");
+        PurchaseStatus thisPurchaseStatus = customerInvolved.purchaseBook(bookInvolved);
+        System.out.println(thisPurchaseStatus.value());
+        numberOfTransaction++;
+        currentDate = new Date();
+        if (thisPurchaseStatus== PurchaseStatus.success)
+        {
+            currentTransaction = new Transaction(numberOfTransaction,customerInvolved.getUserId(), bookInvolved.getIsbn(), 1,currentDate,true);
+            System.out.println("Remaining books titled \""+bookInvolved.getTitle()+"\"" + " : " + bookInvolved.getQuantity());
+        }
+        else {
+            currentTransaction = new Transaction(numberOfTransaction,customerInvolved.getUserId(), bookInvolved.getIsbn(), 1,currentDate,false);
+        }
+        transactionHistory.add(currentTransaction);
+        System.out.println("");
     }
     
 }

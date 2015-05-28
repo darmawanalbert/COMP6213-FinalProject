@@ -92,7 +92,10 @@ public class Transaction{
     //------------------------------------
     // Miscellaneous other methods.
     //------------------------------------
-
+    public void display()
+    {
+        
+    }
     
 }
  

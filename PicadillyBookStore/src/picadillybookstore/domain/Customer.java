@@ -7,6 +7,7 @@ package picadillybookstore.domain;
 * @since   2015-05-26
 */
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Customer extends User{
     //------------
@@ -168,7 +169,34 @@ public class Customer extends User{
     //-----------------------------
     // Business logic methods.
     //-----------------------------
+    public PurchaseStatus purchaseBook(Book bookBeingPurchased)
+    {
+        Calendar currentTime = Calendar.getInstance();
+        int currentYear = currentTime.get(Calendar.YEAR);
+        int currentMonth = currentTime.get(Calendar.MONTH)+1;
+        String creditCardYearFourDigit = "20"+this.getCreditCardYear();
+        int creditCardYearInteger = Integer.parseInt(creditCardYearFourDigit);
+        int creditCardMonthInteger = Integer.parseInt(this.getCreditCardMonth());
+        if (bookBeingPurchased.getQuantity()!=0)
+        {
+            if (currentMonth<=creditCardMonthInteger && currentYear<=creditCardYearInteger)
+            {
+                bookBeingPurchased.quantity-=1;
+                this.setNumberOfPurchase(this.getNumberOfPurchase()+1);
+                purchasedBook.add(bookBeingPurchased);
+                return PurchaseStatus.success;
+            }
+            else 
+            {
+                return PurchaseStatus.creditCardInvalid;
+            }
 
+
+        }
+        else {
+            return PurchaseStatus.noStock;
+        }
+    }
 
     //------------------------------------
     // Miscellaneous other methods.
@@ -201,6 +229,7 @@ public class Customer extends User{
         }
         System.out.println("");
         System.out.println("Expired Date       : " + this.getCreditCardMonth() + "/" + this.getCreditCardYear());
+        
         
         System.out.println("");
         System.out.println("");
