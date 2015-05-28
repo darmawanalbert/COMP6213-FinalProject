@@ -21,13 +21,13 @@ public class Book {
     String publisherInfo;
     int yearPublished;
     String description;
-    ArrayList <String> keywords = new ArrayList<>();
-    ArrayList <String> category = new ArrayList<>(); 
+    ArrayList<String> keywords = new ArrayList<>();
+    ArrayList<String> category = new ArrayList<>(); 
     
     //----------------
     // Constructor(s).
     //----------------
-    public Book(String author, String title, String isbn, long price, long quantity, String publisherInfo, int yearPublished, String description) {
+    public Book(String author, String title, String isbn, long price, long quantity, String publisherInfo, int yearPublished, String description, ArrayList<String> keywords, ArrayList<String> category) {
         this.author = author;
         this.title = title;
         this.isbn = isbn;
@@ -36,6 +36,8 @@ public class Book {
         this.publisherInfo = publisherInfo;
         this.yearPublished = yearPublished;
         this.description = description;
+        this.keywords = keywords;
+        this.category = category;
     }
     
     //----------------------------------
