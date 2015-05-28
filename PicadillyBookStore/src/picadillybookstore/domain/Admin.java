@@ -18,11 +18,15 @@ public class Admin extends User{
     {
         super(userId,name,gender,username,password,email,phoneNumber);
     }
+    
     //----------------------------------
-    // Accessor/Mutator methods.
+    // Accessor methods.
     //----------------------------------
 
-
+    //----------------------------------
+    // Mutator methods.
+    //----------------------------------
+    
     //-----------------------------
     // Business logic methods.
     //-----------------------------
@@ -31,4 +35,15 @@ public class Admin extends User{
     //------------------------------------
     // Miscellaneous other methods.
     //------------------------------------
+    public void display()
+    {
+        System.out.println("User ID      : " + this.getUserId());
+        System.out.println("Name         : " + this.getName());
+        System.out.println("Gender       : " + this.getGender());
+        System.out.println("Username     : " + this.getUsername());
+        System.out.println("Email        : " + this.getEmail());
+        System.out.println("Phone Number : " + this.getPhoneNumber());
+        System.out.println("");
+        System.out.println("");
+    }
 }

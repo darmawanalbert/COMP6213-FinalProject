@@ -62,10 +62,8 @@ public class PicadillyBookStore {
         adminList.add(a2);
         
         // Output
-        System.out.print("                      Picadilly Book Store");
-        System.out.print("\n----------------------------------------------------------------\n\n\n");
         System.out.println("================================================================");
-        System.out.println("                 Welcome to Picadilly Book Store! \n \tWhere customer satisfaction is our main priority");
+        System.out.println("                 Welcome to Picadilly Book Store! \n\tWhere customer's satisfaction is our main priority");
         System.out.println("================================================================");
         
         // Displaying Books List
@@ -73,18 +71,30 @@ public class PicadillyBookStore {
         System.out.println("                           Book List");
         System.out.println("================================================================");
         
-       for (Book eachBook : bookCatalog) {
+        for (Book eachBook : bookCatalog) {
              eachBook.display();
-       }
+        }
        
-       // Displaying Customer List
+        // Displaying Customer List
         System.out.println("================================================================");
         System.out.println("                           Customer List");
         System.out.println("================================================================");
         
-       for (Customer eachCustomer : customerList) {
+        for (Customer eachCustomer : customerList) {
              eachCustomer.display();
-       }
+        }    
+       
+        // Displaying Admin List
+        System.out.println("================================================================");
+        System.out.println("                           Admin List");
+        System.out.println("================================================================");
+        
+        for (Admin eachAdmin : adminList) {
+             eachAdmin.display();
+        } 
+        
+        
+       
        
     }
     
