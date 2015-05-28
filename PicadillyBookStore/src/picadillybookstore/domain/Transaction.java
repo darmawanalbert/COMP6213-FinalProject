@@ -96,7 +96,7 @@ public class Transaction{
     {
         System.out.println("Transaction ID       : " + this.getTransactionId());
         System.out.println("Customer ID          : " + this.getCustomerId());
-        System.out.println("Custoner Name        : " + this.getTransactionId());
+        System.out.println("Customer Name        : " + this.getTransactionId());
         System.out.println("ISBN                 : " + this.getIsbn());
         System.out.println("Quantity             : " + this.getQuantity());
         System.out.println("Date                 : " + this.getDate());
