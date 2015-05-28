@@ -4,8 +4,8 @@ package picadillybookstore.domain;
 *
 * @author  Albert Darmawan
 * @version 1.0
-* @since   2015-05-26
+* @since   2015-05-28
 */
-public enum Gender {
-    MALE,FEMALE;
+public enum Binding {
+    HARDCOVER,PAPERBACK;
 }
