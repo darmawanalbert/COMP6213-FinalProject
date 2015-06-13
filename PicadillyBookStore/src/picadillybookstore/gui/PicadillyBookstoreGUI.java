@@ -123,7 +123,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel41 = new javax.swing.JLabel();
@@ -140,6 +139,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         jTextField25 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jPasswordField8 = new javax.swing.JPasswordField();
         CustomerMainMenuPanel = new javax.swing.JPanel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
@@ -188,6 +188,8 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         jLabel71 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
+        jLabel93 = new javax.swing.JLabel();
+        jTextField43 = new javax.swing.JTextField();
         AdminAddBookPanel = new javax.swing.JPanel();
         jLabel72 = new javax.swing.JLabel();
         jLabel73 = new javax.swing.JLabel();
@@ -519,19 +521,16 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         AdminTransactionsListPanel.setLayout(AdminTransactionsListPanelLayout);
         AdminTransactionsListPanelLayout.setHorizontalGroup(
             AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
-                .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
-                        .addContainerGap(450, Short.MAX_VALUE)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
-                        .addContainerGap(248, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addGap(137, 137, 137)))
-                .addGap(111, 111, 111))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
+            .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
+                        .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(137, 137, 137)))
+                        .addGap(111, 111, 111))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(168, 168, 168))
@@ -978,12 +977,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField20ActionPerformed(evt);
-            }
-        });
-
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel41.setText("Account Info");
 
@@ -1039,6 +1032,8 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
 
         jCheckBox2.setText("Female");
 
+        jPasswordField8.setText("jPasswordField8");
+
         javax.swing.GroupLayout CustomerSignUpPanelLayout = new javax.swing.GroupLayout(CustomerSignUpPanel);
         CustomerSignUpPanel.setLayout(CustomerSignUpPanelLayout);
         CustomerSignUpPanelLayout.setHorizontalGroup(
@@ -1071,40 +1066,14 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                                         .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
-                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel40)
-                                        .addComponent(jLabel39))
+                                    .addComponent(jLabel39)
                                     .addGap(18, 18, 18)
-                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel40)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jPasswordField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel26)))
-                    .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
-                                .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel42))
-                                .addGap(18, 18, 18)
-                                .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel45)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
-                                .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel44)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel47)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1121,10 +1090,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                                 .addGap(63, 63, 63))))
                     .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
                         .addGap(314, 314, 314)
-                        .addComponent(jLabel41))
-                    .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addComponent(jLabel46)))
+                        .addComponent(jLabel41)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
                 .addGap(0, 34, Short.MAX_VALUE)
@@ -1143,7 +1109,40 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                         .addGap(180, 180, 180))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
                         .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
+                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
+                                            .addGap(140, 140, 140)
+                                            .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
+                                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel43)
+                                                        .addComponent(jLabel42))
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
+                                                    .addComponent(jLabel45)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
+                                                    .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
+                                                            .addComponent(jLabel44)
+                                                            .addGap(18, 18, 18)
+                                                            .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(18, 18, 18)
+                                                            .addComponent(jLabel47)))
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
+                                            .addGap(264, 264, 264)
+                                            .addComponent(jLabel46)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28))))
         );
@@ -1199,10 +1198,10 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                 .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel40)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel40))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1229,7 +1228,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                         .addComponent(jLabel47)))
                 .addGap(40, 40, 40)
                 .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         CustomerMainMenuPanel.setPreferredSize(new java.awt.Dimension(650, 449));
@@ -1385,7 +1384,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         jLabel62.setText("Username:");
 
         jLabel63.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel63.setText("Password:");
+        jLabel63.setText("Old Password:");
 
         jTextField34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1467,117 +1466,135 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel93.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel93.setText("New Password:");
+
+        jTextField43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField43ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CustomerEditProfilePanelLayout = new javax.swing.GroupLayout(CustomerEditProfilePanel);
         CustomerEditProfilePanel.setLayout(CustomerEditProfilePanelLayout);
         CustomerEditProfilePanelLayout.setHorizontalGroup(
             CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                            .addGap(201, 201, 201)
+                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel54)
+                                        .addComponent(jLabel53))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel52)
+                                    .addGap(63, 63, 63))))
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                            .addGap(260, 260, 260)
+                            .addComponent(jLabel69))
+                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                            .addGap(128, 128, 128)
+                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel66)
+                                        .addComponent(jLabel65))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel68)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                            .addComponent(jLabel67)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTextField39, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel70)))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField40, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel56)
+                                    .addComponent(jLabel55))
+                                .addGap(18, 18, 18)
+                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                        .addComponent(jCheckBox3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCheckBox4))))
+                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                            .addComponent(jLabel59)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel58)
+                                                .addComponent(jLabel57))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel61)
+                                            .addComponent(jLabel60))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(14, 14, 14)))
+                        .addGap(154, 154, 154))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
+                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel63)
+                                    .addComponent(jLabel62))
+                                .addGap(18, 18, 18)
+                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel93)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(168, 168, 168)))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addGap(154, 154, 154)
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel51)
-                                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                            .addComponent(jLabel59)
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(jLabel58)
-                                                                .addComponent(jLabel57))
-                                                            .addGap(18, 18, 18)
-                                                            .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                    .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(jLabel61)
-                                                            .addComponent(jLabel60))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(jLabel63)
-                                                            .addComponent(jLabel62))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(30, 30, 30))))))
-                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel66)
-                                            .addComponent(jLabel65))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel68)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                                .addComponent(jLabel67)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField39, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel70)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField40, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                .addGap(201, 201, 201)
-                                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel54)
-                                            .addComponent(jLabel53))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel52)
-                                        .addGap(63, 63, 63))))
-                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                .addGap(276, 276, 276)
-                                .addComponent(jLabel64))
-                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                .addGap(260, 260, 260)
-                                .addComponent(jLabel69)))
-                        .addGap(34, 34, 34))
+                        .addComponent(jLabel51)
+                        .addGap(172, 172, 172))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
                         .addComponent(jLabel71)
                         .addGap(274, 274, 274))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerEditProfilePanelLayout.createSequentialGroup()
-                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel56)
-                            .addComponent(jLabel55))
-                        .addGap(18, 18, 18)
-                        .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(CustomerEditProfilePanelLayout.createSequentialGroup()
-                                .addComponent(jCheckBox3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCheckBox4)))
-                        .addGap(188, 188, 188))))
+                        .addComponent(jLabel64)
+                        .addGap(264, 264, 264))))
         );
         CustomerEditProfilePanelLayout.setVerticalGroup(
             CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1586,7 +1603,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                 .addComponent(jLabel51)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel71)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel52)
                 .addGap(18, 18, 18)
                 .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1633,14 +1650,18 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel62))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel63)
                     .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel93)
+                    .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1665,9 +1686,9 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                     .addGroup(CustomerEditProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel70)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(12, 12, 12))
         );
 
         AdminAddBookPanel.setPreferredSize(new java.awt.Dimension(700, 520));
@@ -2133,10 +2154,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField19ActionPerformed
 
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
-
     private void jTextField21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField21ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField21ActionPerformed
@@ -2232,6 +2249,10 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jTextField43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField43ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField43ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2417,6 +2438,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
@@ -2424,6 +2446,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField5;
     private javax.swing.JPasswordField jPasswordField6;
     private javax.swing.JPasswordField jPasswordField7;
+    private javax.swing.JPasswordField jPasswordField8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -2440,7 +2463,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
@@ -2465,6 +2487,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField40;
     private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField42;
+    private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
