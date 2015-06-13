@@ -9,6 +9,12 @@ package picadillybookstore.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="book")
 public class Book {
     //------------
     // Attributes.
@@ -100,50 +106,66 @@ public class Book {
     //----------------------------------
     // Mutator methods.
     //----------------------------------
+    @XmlElement
     public void setAuthor(String author) {
         this.author = author;
     }
     
+    @XmlElement
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
+    /**
+     *
+     * @param isbn
+     */
+    @XmlAttribute
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
     
+    @XmlElement
     public void setPrice(long price) {
         this.price = price;
     }
     
+    @XmlElement
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
     
+    @XmlElement
     public void setPublisherName(String publisherName) {
         this.publisherName = publisherName;
     }
     
+    @XmlElement
     public void setYearPublished(int yearPublished) {
         this.yearPublished = yearPublished;
     }
     
+    @XmlElement
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @XmlElement
     public void setBinding(Binding binding) {
         this.binding = binding;
     }
 
+    @XmlElement
     public void setSigned(Signed signed) {
         this.signed = signed;
     }
     
+    @XmlElement
     public void setKeywords(List keywords) {
         this.keywords = keywords;
     }
 
+    @XmlElement
     public void setCategory(List category) {
         this.category = category;
     }
