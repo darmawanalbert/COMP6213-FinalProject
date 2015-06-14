@@ -2,7 +2,7 @@ package picadillybookstore.domain;
 
 /**
 * Customer.java
-* This class encapsulates all attributes and methods that a customer has
+* This class encapsulates all attributes and methods that a customer 
 * @author  Albert Darmawan
 * @version 1.0
 * @since   2015-05-26

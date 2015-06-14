@@ -12,7 +12,7 @@
         <email>darmawanalbert@yahoo.com</email>
         <gender>MALE</gender>
         <name>Albert Darmawan</name>
-        <numberOfPurchase>9</numberOfPurchase>
+        <numberOfPurchase>10</numberOfPurchase>
         <password>123456</password>
         <phoneNumber>081281123450</phoneNumber>
         <purchasedBook isbn="978-0-349-40137-9">
@@ -163,6 +163,22 @@
             <title>The Royal Road to Card Magic</title>
             <yearPublished>2011</yearPublished>
         </purchasedBook>
+        <purchasedBook isbn="978-0-316-09997-4">
+            <author>William Poundstone</author>
+            <binding>PAPERBACK</binding>
+            <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">career</category>
+            <description>Trick Questions, Zen-like Riddles, Insanely Difficult Puzzles, and Other Devious Interviewing Techniques You Need to Know to Get a Job Anywhere in the New Economy</description>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">google</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">smart</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">intelligence</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">work</keywords>
+            <price>171770</price>
+            <publisherName>Little, Brown and Company</publisherName>
+            <quantity>7</quantity>
+            <signed>NOTSIGNED</signed>
+            <title>Are You Smart Enough to Work at Google?</title>
+            <yearPublished>2012</yearPublished>
+        </purchasedBook>
         <streetAddress>Jalan Citandui 1 Taman Tirta Golf</streetAddress>
         <username>darmawanalbert</username>
         <zipCode>15310</zipCode>
@@ -203,6 +219,25 @@
         <phoneNumber>081281123450</phoneNumber>
         <streetAddress>Jalan Citandui</streetAddress>
         <username>elbertrock</username>
+        <zipCode>15310</zipCode>
+    </customer>
+    <customer userId="4">
+        <NUMBER_OF_CREDIT_CARD_SUBSTRING>4</NUMBER_OF_CREDIT_CARD_SUBSTRING>
+        <city>Tangerang Selatan</city>
+        <country>Indonesia</country>
+        <creditCardMonth>05</creditCardMonth>
+        <creditCardName>Albert Darmawan</creditCardName>
+        <creditCardNo>1010202050504049</creditCardNo>
+        <creditCardYear>18</creditCardYear>
+        <cvc>153</cvc>
+        <email>darmawanalbert@gmail.com</email>
+        <gender>MALE</gender>
+        <name>Albert Darmawan</name>
+        <numberOfPurchase>0</numberOfPurchase>
+        <password>albertd</password>
+        <phoneNumber>082125001166</phoneNumber>
+        <streetAddress>Jalan Citandui 1</streetAddress>
+        <username>albertd</username>
         <zipCode>15310</zipCode>
     </customer>
 </customers>

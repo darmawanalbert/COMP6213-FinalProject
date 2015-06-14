@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Transaction.java
- * This class encapsulates all attributes that a transaction hs
+ * This class encapsulates all attributes that a transaction has
  * @author Matthew Kharli
  * @version 1.0
  * @since 2015-5-28
