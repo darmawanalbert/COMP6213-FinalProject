@@ -29,7 +29,7 @@ import picadillybookstore.domain.PurchaseStatus;
 *
 * @author  Albert Darmawan
 * @version 1.0
-* @since   2015-05-26
+* @since   2015-06-14
  */
 public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     Customer currentCustomer;
