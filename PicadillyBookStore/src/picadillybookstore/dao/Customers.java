@@ -12,7 +12,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import picadillybookstore.domain.Customer;
 /**
- *
+ * Customers.java
+ * This class is the container of Customer List<>
 * @author  Albert Darmawan
 * @version 1.0
 * @since   2015-06-06
@@ -20,17 +21,27 @@ import picadillybookstore.domain.Customer;
 @XmlRootElement(name="customers")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Customers {
+    //------------
+    // Attribute
+    //------------
     @XmlElement(name="customer")
     private List<Customer> customers;
-
     /**
      *
      * @return
      */
+    
+    //------------
+    // Accessor
+    //------------
     public List<Customer> getCustomers()
     {
         return customers;
     }
+    
+    //------------
+    // Mutator
+    //------------
     public void setCustomers(List<Customer> customers)
     {
         this.customers  =customers;

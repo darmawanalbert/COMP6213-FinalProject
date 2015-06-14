@@ -11,7 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import picadillybookstore.domain.Transaction;
 /**
- *
+ * Transactions.java
+ * This class is the container of Transaction List<>
  * @author  Albert Darmawan
  * @version 1.0
  * @since   2015-06-14
@@ -20,12 +21,23 @@ import picadillybookstore.domain.Transaction;
 @XmlRootElement(name="transactions")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Transactions {
+    //------------
+    // Attribute
+    //------------
     @XmlElement(name="transaction")
     private List<Transaction> transactions = null;
+    
+    //------------
+    // Accessor
+    //------------
     public List<Transaction> getTransactions()
     {
         return transactions;
     }
+    
+    //------------
+    // Mutator
+    //------------
     public void setTransactions(List<Transaction> transactions)
     {
         this.transactions  =transactions;

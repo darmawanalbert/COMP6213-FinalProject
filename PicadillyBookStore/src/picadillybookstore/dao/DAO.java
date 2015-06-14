@@ -5,8 +5,6 @@
  */
 package picadillybookstore.dao;
 
-
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 /**
+* DAO.java 
 * This class contains every function related to accessing data from XML and storing data to XML
 *
 * @author  Albert Darmawan
@@ -39,7 +38,7 @@ public class DAO {
             File bookFile = new File("book.xml");
             
             JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
-            // Unmarshaling
+            // Unmarshaling (convert data from XML into Java Object)
             Unmarshaller jaxbUnmarshaller;
             jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             bookListReturned = (Books) jaxbUnmarshaller.unmarshal(bookFile);
@@ -74,20 +73,16 @@ public class DAO {
         bookCollection.getBooks().add(bookAdded);
         try {
         File bookFile = new File("book.xml");
-        // Marshaling
-	
+        // Marshaling (Converting Java Object into XML file)
         JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
 	Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
 	// output pretty printed
 	jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
 	jaxbMarshaller.marshal(bookCollection, bookFile);
         }
         catch (JAXBException e)
         {
             System.out.println("JAXB error,  " + e.getMessage() );
-            
         }
     }
     
@@ -98,28 +93,23 @@ public class DAO {
         newBookCollection.setBooks(new ArrayList<Book>());
         try {
             File bookFile = new File("book.xml");
-            // Marshaling
-            
             for (Book bookChecked : bookCollection.getBooks())
             {
                 if (!(bookChecked.getIsbn().equals(isbn)))
                 {
                     newBookCollection.getBooks().add(bookChecked);
                 }
-                
             }
+            // Marshalling (Converting Java Object into XML file)
             JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
             jaxbMarshaller.marshal(newBookCollection, bookFile);
         }
         catch (JAXBException e)
         {
             System.out.println("JAXB error,  " + e.getMessage() );
-            
         }
     }
     
@@ -130,12 +120,8 @@ public class DAO {
         String bookEditedIsbn = bookEdited.getIsbn();
         Books newBookCollection = new Books();
         newBookCollection.setBooks(new ArrayList<Book>());
-        /*long previousQuantity = bookEdited.getQuantity();
-        Book bookWithUpdatedQuantity = (Book) bookEdited;    
-        bookWithUpdatedQuantity.setQuantity(previousQuantity+quantityIncreased);*/
         try {
             File bookFile = new File("book.xml");
-            // Marshaling
             for (Book bookChecked : bookCollection.getBooks())
             {
                 bookCheckedIsbn = bookChecked.getIsbn();
@@ -147,20 +133,19 @@ public class DAO {
                     newBookCollection.getBooks().add(bookChecked);
                 }
             }
+            // Marshalling (Converting Java Object into XML file)
             JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
             jaxbMarshaller.marshal(newBookCollection, bookFile);
         }
         catch (JAXBException e)
         {
-            System.out.println("JAXB error,  " + e.getMessage() );
-            
+            System.out.println("JAXB error,  " + e.getMessage() );   
         }
     }
+    
     //----------------
     // Customer-related functions
     //----------------
@@ -173,16 +158,14 @@ public class DAO {
             File customerFile = new File("customer.xml");
             
             JAXBContext jaxbContext = JAXBContext.newInstance(Customers.class);
-            // Unmarshaling
+            // Unmarshaling (Converting XML file into Java Object)
             Unmarshaller jaxbUnmarshaller;
             jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             customerListReturned = (Customers) jaxbUnmarshaller.unmarshal(customerFile);
-
         }
         catch (JAXBException e)
         {
-            System.out.println("JAXB error,  " + e.getMessage() );
-            
+            System.out.println("JAXB error,  " + e.getMessage() ); 
         }
         return customerListReturned;
     }
@@ -192,7 +175,6 @@ public class DAO {
         Customers customerList = (Customers) DAO.getAllCustomers();
         Customer customerReturned = null;
         // sequential search. Complexity : O(n)
-        
         for (Customer customerChecked : customerList.getCustomers())
         {
             if (customerChecked.getUsername().equals(username))
@@ -209,22 +191,19 @@ public class DAO {
         customerList.getCustomers().add(customerAdded);
         try {
         File customerFile = new File("customer.xml");
-        // Marshaling
-	
+        // Marshalling (Converting Java Object into XML file)
         JAXBContext jaxbContext = JAXBContext.newInstance(Customers.class);
 	Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
 	// output pretty printed
 	jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
 	jaxbMarshaller.marshal(customerList, customerFile);
         }
         catch (JAXBException e)
         {
             System.out.println("JAXB error,  " + e.getMessage() );
-            
         }
     }
+    
     public static void replaceCustomerData(Customer customerEdited)
     {
         Customers customerCollection = (Customers) DAO.getAllCustomers();
@@ -232,12 +211,8 @@ public class DAO {
         long customerEditedUserId = customerEdited.getUserId();
         Customers newCustomerCollection = new Customers();
         newCustomerCollection.setCustomers(new ArrayList<Customer>());
-        /*long previousQuantity = bookEdited.getQuantity();
-        Book bookWithUpdatedQuantity = (Book) bookEdited;    
-        bookWithUpdatedQuantity.setQuantity(previousQuantity+quantityIncreased);*/
         try {
             File customerFile = new File("customer.xml");
-            // Marshaling
             for (Customer customerChecked : customerCollection.getCustomers())
             {
                 customerCheckedUserId = customerChecked.getUserId();
@@ -249,20 +224,19 @@ public class DAO {
                     newCustomerCollection.getCustomers().add(customerChecked);
                 }
             }
+            // Marshalling (Converting Java Object into XML file)
             JAXBContext jaxbContext = JAXBContext.newInstance(Customers.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
             // output pretty printed
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); 
             jaxbMarshaller.marshal(newCustomerCollection, customerFile);
         }
         catch (JAXBException e)
         {
-            System.out.println("JAXB error,  " + e.getMessage() );
-            
+            System.out.println("JAXB error,  " + e.getMessage() );           
         }
     }
+    
     public static long numberOfCustomers()
     {
         Customers customerCollection = (Customers) DAO.getAllCustomers();
@@ -273,6 +247,7 @@ public class DAO {
         }
         return customerCount;
     }
+    
     //----------------
     // Admin-related functions
     //----------------
@@ -284,16 +259,14 @@ public class DAO {
             File adminFile = new File("admin.xml");
             
             JAXBContext jaxbContext = JAXBContext.newInstance(Admins.class);
-            // Unmarshaling
+            // Unmarshaling (Converting XML file into Java Object)
             Unmarshaller jaxbUnmarshaller;
             jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             adminListReturned = (Admins) jaxbUnmarshaller.unmarshal(adminFile);
-
         }
         catch (JAXBException e)
         {
-            System.out.println("JAXB error,  " + e.getMessage() );
-            
+            System.out.println("JAXB error,  " + e.getMessage() );           
         }
         return adminListReturned;
     }
@@ -304,20 +277,16 @@ public class DAO {
         adminList.getAdmins().add(adminAdded);
         try {
         File adminFile = new File("admin.xml");
-        // Marshaling
-	
+        // Marshalling (Converting Java Object into XML file)
         JAXBContext jaxbContext = JAXBContext.newInstance(Admins.class);
 	Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
 	// output pretty printed
 	jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
 	jaxbMarshaller.marshal(adminList, adminFile);
         }
         catch (JAXBException e)
         {
             System.out.println("JAXB error,  " + e.getMessage() );
-            
         }
     }
     
@@ -332,16 +301,14 @@ public class DAO {
             File transactionFile = new File("transaction.xml");
             
             JAXBContext jaxbContext = JAXBContext.newInstance(Transactions.class);
-            // Unmarshaling
+            // Unmarshaling (Converting XML file into Java Object)
             Unmarshaller jaxbUnmarshaller;
             jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             transactionListReturned = (Transactions) jaxbUnmarshaller.unmarshal(transactionFile);
-
         }
         catch (JAXBException e)
         {
-            System.out.println("JAXB error,  " + e.getMessage() );
-            
+            System.out.println("JAXB error,  " + e.getMessage() );          
         }
         return transactionListReturned;
     }
@@ -352,14 +319,11 @@ public class DAO {
         transactionList.getTransactions().add(transactionAdded);
         try {
         File transactionFile = new File("transaction.xml");
-        // Marshaling
-	
+        // Marshalling (Converting Java Object into XML file)
         JAXBContext jaxbContext = JAXBContext.newInstance(Transactions.class);
 	Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
- 
 	// output pretty printed
 	jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
 	jaxbMarshaller.marshal(transactionList, transactionFile);
         }
         catch (JAXBException e)

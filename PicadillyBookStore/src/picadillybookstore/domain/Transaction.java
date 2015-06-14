@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
- *
+ * Transaction.java
+ * This class encapsulates all attributes that a transaction hs
  * @author Matthew Kharli
  * @version 1.0
  * @since 2015-5-28
@@ -15,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Transaction {
     
- 
     //------------
     // Attributes.
     //------------
@@ -26,7 +26,6 @@ public class Transaction {
     private Date date;
     public boolean paymentVerification;
  
-    
     //----------------
     // Constructor(s).
     //----------------
@@ -44,19 +43,21 @@ public class Transaction {
         this.paymentVerification = paymentVerification;
     }    
     
-    
     //----------------------------------
     // Accessor methods.
     //----------------------------------
     public long getTransactionId(){
         return transactionId;
     }
+    
     public long getCustomerId(){
         return customerId;
     }
+    
     public String getIsbn(){
         return isbn;
     }
+    
     public long getQuantity(){
         return quantity;
     }
@@ -69,44 +70,32 @@ public class Transaction {
         return paymentVerification;
     }
     
-    
     //----------------------------------
     // Mutator methods.
     //----------------------------------
-    
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
-    
-   
+      
     public void setIsbn(String isbn){
         this.isbn = isbn;
     }
-    
     
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
     
-    
     public void setDate(Date date) {
         this.date = (Date) date.clone();
     }
-    
     
     public void setPaymentVerification(boolean paymentVerification) {
         this.paymentVerification = paymentVerification;
     }
     
-    
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
-    
-    //-----------------------------
-    // Business logic methods.
-    //-----------------------------
-
 
     //------------------------------------
     // Miscellaneous other methods.
@@ -129,6 +118,5 @@ public class Transaction {
         }
         System.out.println("");
     }
-    
 }
  

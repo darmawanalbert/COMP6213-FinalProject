@@ -15,7 +15,8 @@ import picadillybookstore.domain.Transaction;
 import picadillybookstore.domain.PurchaseStatus;
 
 /**
-* This class is the container of main function
+* PicadillyBookStoreStepThree.java 
+* This class is the container of main function, before using DAO
 *
 * @author  Albert Darmawan
 * @version 1.0
@@ -35,11 +36,14 @@ public class PicadillyBookStoreStepThree {
      *
      * @param args
      */
+     //------------
+    // Main function
+    //------------
     public static void main(String[] args) {
-        Book b1, b2, b3,b4;
+        // Object variable declaration
+        Book b1, b2, b3;
         Customer c1, c2;
         Admin a1, a2;
-        
         
         // Defining 3 books
         b1 = new Book("George Berkowski", "How to Build A Billion Dollar App", "978-0-349-40137-9",(long) 246221, (long) 0, "Little, Brown Book Group",2015, "An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start", Binding.PAPERBACK,Signed.NOTSIGNED, Arrays.asList("app", "business", "startup", "technology", "mobile"), Arrays.asList("business"));

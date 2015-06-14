@@ -1,7 +1,8 @@
 package picadillybookstore.domain;
 
 /**
-*
+* Customer.java
+* This class encapsulates all attributes and methods that a customer has
 * @author  Albert Darmawan
 * @version 1.0
 * @since   2015-05-26
@@ -18,10 +19,10 @@ public class Customer {
     // Constant(s).
     //------------
     public final int NUMBER_OF_CREDIT_CARD_SUBSTRING = 4;
+    
     //------------
     // Attributes.
-    //------------
-    
+    //------------  
     private long userId;
     private String name;
     private Gender gender;
@@ -87,8 +88,6 @@ public class Customer {
         this.creditCardYear = creditCardYear;
     }
     
-    
-
     //----------------------------------
     // Accessor methods.
     //----------------------------------
@@ -164,8 +163,6 @@ public class Customer {
         return purchasedBook;
     }    
     
-    
-
     //----------------------------------
     // Mutator methods.
     //----------------------------------
@@ -299,8 +296,7 @@ public class Customer {
             }
             else {
                 return false;
-            }
-            
+            } 
         }
         else {
             if (currentYear<=creditCardYearInteger) {
@@ -365,8 +361,6 @@ public class Customer {
         }
         System.out.println("");
         System.out.println("Expired Date       : " + this.getCreditCardMonth() + "/" + this.getCreditCardYear());
-        
-        
         System.out.println("");
         System.out.println("");
     }

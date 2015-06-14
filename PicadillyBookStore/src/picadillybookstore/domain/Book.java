@@ -1,7 +1,8 @@
 package picadillybookstore.domain;
 
 /**
- *
+ * Book.java
+ * This class encapsulates all attribute that a book has
  * @author Elbert Christopher Larosa
  * @version 1.0
  * @since 2015-5-28
@@ -9,7 +10,6 @@ package picadillybookstore.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -54,6 +54,7 @@ public class Book {
     public Book()
     {
     }
+    
     //----------------------------------
     // Accessor methods.
     //----------------------------------
@@ -104,8 +105,6 @@ public class Book {
     public List getCategory() {
         return category;
     }
-
-   
 
     //----------------------------------
     // Mutator methods.
@@ -169,11 +168,6 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    
-    //-----------------------------
-    // Business logic methods.
-    //-----------------------------
-
 
     //------------------------------------
     // Miscellaneous other methods.
@@ -220,6 +214,5 @@ public class Book {
         }
         System.out.println("");
         System.out.println("");
-    
     }
 }

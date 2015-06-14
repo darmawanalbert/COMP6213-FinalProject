@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package picadillybookstore.gui;
 import java.util.Arrays;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+
 import picadillybookstore.domain.Gender;
 import picadillybookstore.domain.Signed;
 import picadillybookstore.domain.Binding;
@@ -22,8 +24,12 @@ import picadillybookstore.domain.Transaction;
 import picadillybookstore.domain.PurchaseStatus;
 
 /**
- *
- * @author user
+* PicadillyBookstoreGUI.java 
+* This class contains GUI version of our program
+*
+* @author  Albert Darmawan
+* @version 1.0
+* @since   2015-05-26
  */
 public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     Customer currentCustomer;
@@ -34,7 +40,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     /**
      * Creates new form PicadillyBookstoreGUI
      */
-    
     
     public PicadillyBookstoreGUI() {
         initComponents();

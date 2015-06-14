@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Date;
 
-
 import picadillybookstore.domain.Admin;
 import picadillybookstore.domain.Binding;
 import picadillybookstore.domain.Book;
@@ -21,8 +20,8 @@ import picadillybookstore.dao.Admins;
 import picadillybookstore.dao.Transactions;
 
 /**
+* PicadillyBookStore.java
 * This class is the container of main function
-*
 * @author  Albert Darmawan
 * @version 1.0
 * @since   2015-05-26
@@ -41,7 +40,12 @@ public class PicadillyBookStore {
      *
      * @param args
      */
+    
+    //------------
+    // Main Functions
+    //------------
     public static void main(String[] args) {
+        // Object variable declaration and initialization
         Book b1 = null, b2 = null, b3 = null;
         Customer c1 = null, c2 = null;
         Admin a1 = null, a2 = null;
@@ -121,7 +125,7 @@ public class PicadillyBookStore {
         // Creating Transaction array List
         transactionHistory = new ArrayList<>();
         
-        // Output
+        // Outputing Title
         System.out.println("================================================================");
         System.out.println("                 Welcome to Picadilly Book Store! \n\tWhere customer's satisfaction is our main priority");
         System.out.println("================================================================");
@@ -170,16 +174,20 @@ public class PicadillyBookStore {
         } 
     }
     
+    //------------
+    // Function to manage book purchasing
+    //------------
     private static void attemptToPurchaseBook(Customer customerInvolved, Book bookInvolved)
     {
         Transaction currentTransaction;
         Date currentDate;
-        
         System.out.println(customerInvolved.getName()+" is trying to buy \"" + bookInvolved.getTitle() + "\"");
         PurchaseStatus thisPurchaseStatus = customerInvolved.purchaseBook(bookInvolved);
         System.out.println(thisPurchaseStatus.value());
         numberOfTransaction++;
+        // Create a new Date object
         currentDate = new Date();
+        // Create a new Transaction object 
         currentTransaction = new Transaction();
         currentTransaction.setTransactionId(numberOfTransaction);
         currentTransaction.setCustomerId(customerInvolved.getUserId());
@@ -188,6 +196,7 @@ public class PicadillyBookStore {
         currentTransaction.setDate(currentDate);
         if (thisPurchaseStatus== PurchaseStatus.success)
         {
+            // Updating book and customer information when the purchasing is successful
             DAO.replaceBookData(bookInvolved);
             DAO.replaceCustomerData(customerInvolved);
             currentTransaction.setPaymentVerification(true);
@@ -196,8 +205,10 @@ public class PicadillyBookStore {
         else {
            currentTransaction.setPaymentVerification(false);
         }
+        
         // Add currentTransaction to transactionHistory ArrayList
         transactionHistory.add(currentTransaction);
+        
         // Add currentTransaction to transaction.xml
         DAO.addTransaction(currentTransaction);
         System.out.println("");

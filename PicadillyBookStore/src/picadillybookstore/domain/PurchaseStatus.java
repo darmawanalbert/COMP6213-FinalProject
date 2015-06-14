@@ -1,12 +1,12 @@
 package picadillybookstore.domain;
 
 /**
- *
+ * PurchaseStatus.java
+ * This file contains PurchaseStatus Enumeration
  * @author Albert Darmawan
  * @version 1.0
  * @since 2015-05-28
  */
-
 
 public enum PurchaseStatus {
 	// Enumerate the values that the enum can assume.
