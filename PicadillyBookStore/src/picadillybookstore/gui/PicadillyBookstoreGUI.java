@@ -4,21 +4,33 @@
  * and open the template in the editor.
  */
 package picadillybookstore.gui;
+import java.util.Arrays;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 import picadillybookstore.domain.Gender;
+import picadillybookstore.domain.Signed;
+import picadillybookstore.domain.Binding;
 import picadillybookstore.dao.DAO;
 import picadillybookstore.dao.Admins;
 import picadillybookstore.dao.Customers;
 import picadillybookstore.dao.Books;
+import picadillybookstore.dao.Transactions;
 import picadillybookstore.domain.Admin;
 import picadillybookstore.domain.Customer;
 import picadillybookstore.domain.Book;
+import picadillybookstore.domain.Transaction;
+import picadillybookstore.domain.PurchaseStatus;
 
 /**
  *
  * @author user
  */
 public class PicadillyBookstoreGUI extends javax.swing.JFrame {
-
+    Customer currentCustomer;
+    DefaultTableModel adminBookTableModel;
+    DefaultTableModel adminTransactionTableModel;
+    DefaultTableModel adminCustomerTableModel;
+    DefaultTableModel customerBookTableModel;
     /**
      * Creates new form PicadillyBookstoreGUI
      */
@@ -27,10 +39,84 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     public PicadillyBookstoreGUI() {
         initComponents();
         // Display UserChoicePanel Only
+        adminBookTableModel = (DefaultTableModel) adminBookTable.getModel();
+        adminTransactionTableModel = (DefaultTableModel) adminTransactionTable.getModel();
+        adminCustomerTableModel = (DefaultTableModel) adminCustomerTable.getModel();
+        customerBookTableModel = (DefaultTableModel) customerBookTable.getModel();
         this.hideAllPanel();
         UserChoicePanel.setVisible(true);
     }
 
+    private void displayAdminBookList() {
+        adminBookTableModel.setRowCount(0);
+        Books bookList = DAO.getAllBooks();
+        for (Book bookChecked : bookList.getBooks())
+        {
+            adminBookTableModel.insertRow(adminBookTableModel.getRowCount(), new Object[]{
+                bookChecked.getIsbn(),
+                bookChecked.getTitle(),
+                bookChecked.getAuthor(),
+                bookChecked.getQuantity(),
+                bookChecked.getPrice()
+            });
+        }
+    }
+    
+    private void displayCustomerBookList() {
+        customerBookTableModel.setRowCount(0);
+        Books bookList = DAO.getAllBooks();
+        for (Book bookChecked : bookList.getBooks())
+        {
+            customerBookTableModel.insertRow(customerBookTableModel.getRowCount(), new Object[]{
+                bookChecked.getIsbn(),
+                bookChecked.getTitle(),
+                bookChecked.getAuthor(),
+                bookChecked.getQuantity(),
+                bookChecked.getPrice()
+            });
+        }
+    }
+    
+    private void displayAdminTransactionList() {
+        adminTransactionTableModel.setRowCount(0);
+        Transactions transactionList = DAO.getAllTransactions();
+        String verificationResult;
+        for (Transaction transactionChecked : transactionList.getTransactions())
+        {
+            if (transactionChecked.paymentVerification)
+            {
+                verificationResult = "Verified";
+                
+            }
+            else {
+                verificationResult = "Not verified";
+            }
+            adminTransactionTableModel.insertRow(adminTransactionTableModel.getRowCount(), new Object[]{
+                transactionChecked.getTransactionId(),
+                transactionChecked.getCustomerId(),
+                transactionChecked.getIsbn(),
+                transactionChecked.getQuantity(),
+                transactionChecked.getDate(),
+                verificationResult
+            });
+        }
+    }
+    
+    private void displayAdminCustomerList() {
+        adminCustomerTableModel.setRowCount(0);
+        Customers customerList = DAO.getAllCustomers();
+        for (Customer customerChecked : customerList.getCustomers())
+        {
+            adminCustomerTableModel.insertRow(adminCustomerTableModel.getRowCount(), new Object[]{
+                customerChecked.getUserId(),
+                customerChecked.getName(),
+                customerChecked.getEmail(),
+                customerChecked.getNumberOfPurchase(),
+                customerChecked.getCountry()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +139,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         adminPasswordLabel = new javax.swing.JLabel();
         adminUsernameField = new javax.swing.JTextField();
         adminLoginButton = new javax.swing.JButton();
-        adminSignUpOptionButton = new javax.swing.JButton();
         adminPasswordField = new javax.swing.JPasswordField();
         AdminMenuPanel = new javax.swing.JPanel();
         adminMenuPanelTitle = new javax.swing.JLabel();
@@ -62,38 +147,30 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         adminMenuCustomersButton = new javax.swing.JButton();
         adminMenuTransactionsButton = new javax.swing.JButton();
         AdminTransactionsListPanel = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        AdminTransactionsListPanelTitle = new javax.swing.JLabel();
+        AdminTransactionsListPanelSubtitle = new javax.swing.JLabel();
+        adminTransactionsListLogoutButton = new javax.swing.JButton();
+        adminTransactionsListMenuButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        adminTransactionTable = new javax.swing.JTable();
         AdminBooksListPanel = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
+        AdminBooksListPanelTitle = new javax.swing.JLabel();
+        AdminBooksListPanelSubtitle = new javax.swing.JLabel();
+        adminBooksListLogoutButton = new javax.swing.JButton();
+        addBookButton = new javax.swing.JButton();
+        adminBooksListMenuButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        adminBookTable = new javax.swing.JTable();
+        isbnToDeleteField = new javax.swing.JTextField();
+        AdminBooksListISBNLabel = new javax.swing.JLabel();
+        AdminDeleteBookButton = new javax.swing.JButton();
         AdminCustomersListPanel = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        AdminSignUpPanel = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
-        jPasswordField5 = new javax.swing.JPasswordField();
-        jPasswordField6 = new javax.swing.JPasswordField();
+        AdminCustomersListPanelTitle = new javax.swing.JLabel();
+        AdminCustomersListPanelSubtitle = new javax.swing.JLabel();
+        adminCustomersListLogoutButton = new javax.swing.JButton();
+        adminCustomersListMenuButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        adminCustomerTable = new javax.swing.JTable();
         CustomerLoginPanel = new javax.swing.JPanel();
         customerLoginPanelTitle = new javax.swing.JLabel();
         customerLoginPanelSubtitle = new javax.swing.JLabel();
@@ -104,11 +181,15 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         customerLoginButton = new javax.swing.JButton();
         customerPasswordField = new javax.swing.JPasswordField();
         CustomerMainMenuPanel = new javax.swing.JPanel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jLabel50 = new javax.swing.JLabel();
+        CustomerMainMenuPanelTitle = new javax.swing.JLabel();
+        CustomerMainMenuPanelSubtitle = new javax.swing.JLabel();
+        customerMainMenuLogoutButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        customerBookTable = new javax.swing.JTable();
+        CustomerISBNChoiceLabel = new javax.swing.JLabel();
+        purchaseButton = new javax.swing.JButton();
+        customerIsbnChoiceField = new javax.swing.JTextField();
+        purchasingStatusLabel = new javax.swing.JLabel();
         CustomerEditProfilePanel = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jTextField26 = new javax.swing.JTextField();
@@ -154,46 +235,35 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         jLabel93 = new javax.swing.JLabel();
         jTextField43 = new javax.swing.JTextField();
         AdminAddBookPanel = new javax.swing.JPanel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
-        jButton35 = new javax.swing.JButton();
-        jLabel74 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel75 = new javax.swing.JLabel();
-        jLabel76 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel77 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel78 = new javax.swing.JLabel();
-        jLabel79 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel80 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField41 = new javax.swing.JTextField();
-        jLabel81 = new javax.swing.JLabel();
-        jLabel82 = new javax.swing.JLabel();
-        jTextField42 = new javax.swing.JTextField();
-        jLabel83 = new javax.swing.JLabel();
-        jLabel84 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        jLabel86 = new javax.swing.JLabel();
-        jLabel87 = new javax.swing.JLabel();
-        jLabel88 = new javax.swing.JLabel();
-        jLabel89 = new javax.swing.JLabel();
-        jLabel90 = new javax.swing.JLabel();
-        jLabel91 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
-        jComboBox5 = new javax.swing.JComboBox();
-        jComboBox6 = new javax.swing.JComboBox();
-        jTextField48 = new javax.swing.JTextField();
-        jLabel92 = new javax.swing.JLabel();
-        jButton36 = new javax.swing.JButton();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        AdminAddBookPanelTitle = new javax.swing.JLabel();
+        AdminSubmitBook = new javax.swing.JButton();
+        AdminAddBookPanelSubtitle = new javax.swing.JLabel();
+        bookQuantityLabel = new javax.swing.JLabel();
+        quantityField = new javax.swing.JTextField();
+        isbnLabel = new javax.swing.JLabel();
+        isbnField = new javax.swing.JTextField();
+        authorField = new javax.swing.JTextField();
+        authorLabel = new javax.swing.JLabel();
+        publisherNameField = new javax.swing.JTextField();
+        publishedYearField = new javax.swing.JTextField();
+        publishedYearLabel = new javax.swing.JLabel();
+        bookTitleLabel = new javax.swing.JLabel();
+        bookTitleField = new javax.swing.JTextField();
+        publishedNameLabel = new javax.swing.JLabel();
+        keywordsField = new javax.swing.JTextField();
+        descriptionField = new javax.swing.JTextField();
+        descriptionLabel = new javax.swing.JLabel();
+        bookPriceLabel = new javax.swing.JLabel();
+        bookPriceField = new javax.swing.JTextField();
+        keywordsLabel = new javax.swing.JLabel();
+        descriptionCharactersLimitLabel = new javax.swing.JLabel();
+        bookPriceCurrencyLabel = new javax.swing.JLabel();
+        bindingLabel = new javax.swing.JLabel();
+        signatureLabel = new javax.swing.JLabel();
+        signatureComboBox = new javax.swing.JComboBox();
+        bindingComboBox = new javax.swing.JComboBox();
+        categoryLabel = new javax.swing.JLabel();
+        categoryField = new javax.swing.JTextField();
         CustomerSignUpScrollPane = new javax.swing.JScrollPane();
         CustomerSignUpPanel = new javax.swing.JPanel();
         customerSignUpPanelTitle = new javax.swing.JLabel();
@@ -316,19 +386,12 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
             }
         });
 
-        adminSignUpOptionButton.setText("Sign Up");
-        adminSignUpOptionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminSignUpOptionButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout AdminLoginPanelLayout = new javax.swing.GroupLayout(AdminLoginPanel);
         AdminLoginPanel.setLayout(AdminLoginPanelLayout);
         AdminLoginPanelLayout.setHorizontalGroup(
             AdminLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminLoginPanelLayout.createSequentialGroup()
-                .addContainerGap(349, Short.MAX_VALUE)
+                .addContainerGap(179, Short.MAX_VALUE)
                 .addGroup(AdminLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLoginPanelLayout.createSequentialGroup()
                         .addGroup(AdminLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,9 +409,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                                 .addGap(114, 114, 114)
                                 .addComponent(adminLoginPanelSubtitle)))
                         .addGap(175, 175, 175))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLoginPanelLayout.createSequentialGroup()
-                        .addComponent(adminSignUpOptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLoginPanelLayout.createSequentialGroup()
                         .addComponent(adminLoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(272, 272, 272))))
@@ -370,9 +430,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                     .addComponent(adminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(adminLoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1026, Short.MAX_VALUE)
-                .addComponent(adminSignUpOptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         AdminMenuPanel.setPreferredSize(new java.awt.Dimension(650, 449));
@@ -446,308 +504,255 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
 
         AdminTransactionsListPanel.setPreferredSize(new java.awt.Dimension(650, 449));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel16.setText("Picadilly Bookstore");
+        AdminTransactionsListPanelTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AdminTransactionsListPanelTitle.setText("Picadilly Bookstore");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel10.setText("List of Transactions");
+        AdminTransactionsListPanelSubtitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AdminTransactionsListPanelSubtitle.setText("List of Transactions");
 
-        jButton5.setText("Change Password");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        adminTransactionsListLogoutButton.setText("Logout");
+        adminTransactionsListLogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                adminTransactionsListLogoutButtonActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Logout");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        adminTransactionsListMenuButton.setText("Menu");
+        adminTransactionsListMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                adminTransactionsListMenuButtonActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Menu");
+        adminTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButton12.setText("Delete All");
+            },
+            new String [] {
+                "Transaction ID", "Customer ID", "ISBN", "Quantity", "Date", "Verification"
+            }
+        ));
+        jScrollPane2.setViewportView(adminTransactionTable);
 
         javax.swing.GroupLayout AdminTransactionsListPanelLayout = new javax.swing.GroupLayout(AdminTransactionsListPanel);
         AdminTransactionsListPanel.setLayout(AdminTransactionsListPanelLayout);
         AdminTransactionsListPanelLayout.setHorizontalGroup(
             AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
-                        .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(137, 137, 137)))
-                        .addGap(111, 111, 111))
+                        .addComponent(AdminTransactionsListPanelSubtitle)
+                        .addGap(248, 248, 248))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
+                        .addComponent(AdminTransactionsListPanelTitle)
                         .addGap(168, 168, 168))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(adminTransactionsListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(adminTransactionsListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminTransactionsListPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         AdminTransactionsListPanelLayout.setVerticalGroup(
             AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminTransactionsListPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16)
+                .addComponent(AdminTransactionsListPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
+                .addComponent(AdminTransactionsListPanelSubtitle)
                 .addGap(28, 28, 28)
                 .addGroup(AdminTransactionsListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1225, Short.MAX_VALUE)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                    .addComponent(adminTransactionsListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminTransactionsListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         AdminBooksListPanel.setPreferredSize(new java.awt.Dimension(650, 449));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel17.setText("Picadilly Bookstore");
+        AdminBooksListPanelTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AdminBooksListPanelTitle.setText("Picadilly Bookstore");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel14.setText("List of Books");
+        AdminBooksListPanelSubtitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AdminBooksListPanelSubtitle.setText("List of Books");
 
-        jButton13.setText("Change Password");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        adminBooksListLogoutButton.setText("Logout");
+        adminBooksListLogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                adminBooksListLogoutButtonActionPerformed(evt);
             }
         });
 
-        jButton14.setText("Logout");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        addBookButton.setText("Add New");
+        addBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                addBookButtonActionPerformed(evt);
             }
         });
 
-        jButton15.setText("Add New");
+        adminBooksListMenuButton.setText("Menu");
+        adminBooksListMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminBooksListMenuButtonActionPerformed(evt);
+            }
+        });
 
-        jButton16.setText("Menu");
+        adminBookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButton17.setText("Delete All");
+            },
+            new String [] {
+                "ISBN", "Title", "Author", "Quantity", "Price (Rp.)"
+            }
+        ));
+        jScrollPane1.setViewportView(adminBookTable);
+
+        isbnToDeleteField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                isbnToDeleteFieldActionPerformed(evt);
+            }
+        });
+
+        AdminBooksListISBNLabel.setText("ISBN:");
+
+        AdminDeleteBookButton.setText("Delete");
+        AdminDeleteBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdminDeleteBookButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AdminBooksListPanelLayout = new javax.swing.GroupLayout(AdminBooksListPanel);
         AdminBooksListPanel.setLayout(AdminBooksListPanelLayout);
         AdminBooksListPanelLayout.setHorizontalGroup(
             AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminBooksListPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
             .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
                 .addGroup(AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminBooksListPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminBooksListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(190, 190, 190)
+                        .addComponent(adminBooksListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel17))
-                    .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(jLabel14)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminBooksListPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton13)
-                .addGap(18, 18, 18)
-                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
+                                .addGap(182, 182, 182)
+                                .addComponent(AdminBooksListPanelTitle))
+                            .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
+                                .addGap(277, 277, 277)
+                                .addComponent(AdminBooksListPanelSubtitle))
+                            .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(AdminBooksListISBNLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(isbnToDeleteField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(AdminDeleteBookButton)))))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         AdminBooksListPanelLayout.setVerticalGroup(
             AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminBooksListPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel17)
+                .addComponent(AdminBooksListPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14)
+                .addComponent(AdminBooksListPanelSubtitle)
                 .addGap(29, 29, 29)
                 .addGroup(AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                    .addComponent(adminBooksListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminBooksListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(AdminBooksListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(isbnToDeleteField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AdminBooksListISBNLabel)
+                    .addComponent(AdminDeleteBookButton))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
 
         AdminCustomersListPanel.setPreferredSize(new java.awt.Dimension(650, 449));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel18.setText("Picadilly Bookstore");
+        AdminCustomersListPanelTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AdminCustomersListPanelTitle.setText("Picadilly Bookstore");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel15.setText("List of Customers");
+        AdminCustomersListPanelSubtitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AdminCustomersListPanelSubtitle.setText("List of Customers");
 
-        jButton18.setText("Change Password");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        adminCustomersListLogoutButton.setText("Logout");
+        adminCustomersListLogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                adminCustomersListLogoutButtonActionPerformed(evt);
             }
         });
 
-        jButton19.setText("Logout");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        adminCustomersListMenuButton.setText("Menu");
+        adminCustomersListMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                adminCustomersListMenuButtonActionPerformed(evt);
             }
         });
 
-        jButton20.setText("Menu");
+        adminCustomerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButton21.setText("Delete All");
+            },
+            new String [] {
+                "User ID", "Name", "Email", "Number Of Purchase", "Country"
+            }
+        ));
+        jScrollPane3.setViewportView(adminCustomerTable);
 
         javax.swing.GroupLayout AdminCustomersListPanelLayout = new javax.swing.GroupLayout(AdminCustomersListPanel);
         AdminCustomersListPanel.setLayout(AdminCustomersListPanelLayout);
         AdminCustomersListPanelLayout.setHorizontalGroup(
             AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminCustomersListPanelLayout.createSequentialGroup()
-                .addGap(174, 174, 174)
                 .addGroup(AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminCustomersListPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminCustomersListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(adminCustomersListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AdminCustomersListPanelLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel15)))
-                .addContainerGap(180, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminCustomersListPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminCustomersListPanelLayout.createSequentialGroup()
-                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton18)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminCustomersListPanelLayout.createSequentialGroup()
-                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))))
+                        .addGap(174, 174, 174)
+                        .addGroup(AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AdminCustomersListPanelTitle)
+                            .addGroup(AdminCustomersListPanelLayout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(AdminCustomersListPanelSubtitle)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(AdminCustomersListPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         AdminCustomersListPanelLayout.setVerticalGroup(
             AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminCustomersListPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel18)
+                .addComponent(AdminCustomersListPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel15)
+                .addComponent(AdminCustomersListPanelSubtitle)
                 .addGap(30, 30, 30)
                 .addGroup(AdminCustomersListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
-                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-        );
-
-        AdminSignUpPanel.setPreferredSize(new java.awt.Dimension(650, 449));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Admin Sign Up");
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel19.setText("Picadilly Bookstore");
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel20.setText("Username:");
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel21.setText("Password:");
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jButton22.setText("Enter");
-
-        jButton23.setText("Sign Up");
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel22.setText("Confirm Password:");
-
-        jPasswordField5.setText("jPasswordField5");
-
-        jPasswordField6.setText("jPasswordField6");
-
-        javax.swing.GroupLayout AdminSignUpPanelLayout = new javax.swing.GroupLayout(AdminSignUpPanel);
-        AdminSignUpPanel.setLayout(AdminSignUpPanelLayout);
-        AdminSignUpPanelLayout.setHorizontalGroup(
-            AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminSignUpPanelLayout.createSequentialGroup()
-                .addContainerGap(290, Short.MAX_VALUE)
-                .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminSignUpPanelLayout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                        .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel21)
-                                            .addComponent(jLabel20))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jPasswordField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel22)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jPasswordField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(43, 43, 43)))
-                            .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(jLabel9)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31))
-        );
-        AdminSignUpPanelLayout.setVerticalGroup(
-            AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdminSignUpPanelLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jLabel19)
+                    .addComponent(adminCustomersListLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminCustomersListMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addGap(38, 38, 38)
-                .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jPasswordField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(AdminSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jPasswordField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 998, Short.MAX_VALUE)
-                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         CustomerLoginPanel.setPreferredSize(new java.awt.Dimension(650, 449));
@@ -789,7 +794,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         CustomerLoginPanelLayout.setHorizontalGroup(
             CustomerLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerLoginPanelLayout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
+                .addContainerGap(181, Short.MAX_VALUE)
                 .addGroup(CustomerLoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerLoginPanelLayout.createSequentialGroup()
                         .addComponent(customerLoginPanelSubtitle)
@@ -843,66 +848,90 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
 
         CustomerMainMenuPanel.setPreferredSize(new java.awt.Dimension(650, 449));
 
-        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel48.setText("Picadilly Bookstore");
+        CustomerMainMenuPanelTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        CustomerMainMenuPanelTitle.setText("Picadilly Bookstore");
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel49.setText("Customer Main Menu");
+        CustomerMainMenuPanelSubtitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CustomerMainMenuPanelSubtitle.setText("Customer Main Menu");
 
-        jButton24.setText("Edit Profile");
-        jButton24.addActionListener(new java.awt.event.ActionListener() {
+        customerMainMenuLogoutButton.setText("Logout");
+        customerMainMenuLogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton24ActionPerformed(evt);
+                customerMainMenuLogoutButtonActionPerformed(evt);
             }
         });
 
-        jButton25.setText("Logout");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        customerBookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ISBN", "Title", "Author", "Quantity", "Price"
+            }
+        ));
+        jScrollPane4.setViewportView(customerBookTable);
+
+        CustomerISBNChoiceLabel.setText("ISBN:");
+
+        purchaseButton.setText("Purchase!");
+        purchaseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                purchaseButtonActionPerformed(evt);
             }
         });
 
-        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel50.setText("Welcome, ");
+        purchasingStatusLabel.setText("Status : ");
 
         javax.swing.GroupLayout CustomerMainMenuPanelLayout = new javax.swing.GroupLayout(CustomerMainMenuPanel);
         CustomerMainMenuPanel.setLayout(CustomerMainMenuPanelLayout);
         CustomerMainMenuPanelLayout.setHorizontalGroup(
             CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerMainMenuPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel50)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton24)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerMainMenuPanelLayout.createSequentialGroup()
+                .addGroup(CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                     .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
-                        .addGroup(CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
-                                .addGap(133, 133, 133)
-                                .addComponent(jLabel48))
-                            .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
-                                .addGap(198, 198, 198)
-                                .addComponent(jLabel49)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(customerMainMenuLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58))
+            .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
+                .addGroup(CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(CustomerMainMenuPanelTitle))
+                    .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(CustomerMainMenuPanelSubtitle))
+                    .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CustomerISBNChoiceLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(customerIsbnChoiceField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(purchaseButton))
+                    .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(purchasingStatusLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CustomerMainMenuPanelLayout.setVerticalGroup(
             CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerMainMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel48)
+                .addComponent(CustomerMainMenuPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel49)
+                .addComponent(CustomerMainMenuPanelSubtitle)
                 .addGap(40, 40, 40)
+                .addComponent(customerMainMenuLogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addGroup(CustomerMainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel50))
-                .addContainerGap(1270, Short.MAX_VALUE))
+                    .addComponent(purchaseButton)
+                    .addComponent(CustomerISBNChoiceLabel)
+                    .addComponent(customerIsbnChoiceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(purchasingStatusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         CustomerEditProfilePanel.setPreferredSize(new java.awt.Dimension(650, 940));
@@ -1303,67 +1332,56 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
 
         AdminAddBookPanel.setPreferredSize(new java.awt.Dimension(700, 520));
 
-        jLabel72.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel72.setText("Picadilly Bookstore");
+        AdminAddBookPanelTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        AdminAddBookPanelTitle.setText("Picadilly Bookstore");
 
-        jLabel73.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel73.setText("Add Book");
+        AdminSubmitBook.setText("Enter");
+        AdminSubmitBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdminSubmitBookActionPerformed(evt);
+            }
+        });
 
-        jButton35.setText("Enter");
+        AdminAddBookPanelSubtitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AdminAddBookPanelSubtitle.setText("Add Book");
 
-        jLabel74.setText("Quantity:");
+        bookQuantityLabel.setText("Quantity:");
 
-        jLabel75.setText("or");
+        isbnLabel.setText("ISBN:");
 
-        jLabel76.setText("ISBN:");
+        authorLabel.setText("Author:");
 
-        jLabel77.setText("Author:");
+        publishedYearLabel.setText("Published Year:");
 
-        jLabel78.setText("Published Year:");
+        bookTitleLabel.setText("Title:");
 
-        jLabel79.setText("Title:");
+        publishedNameLabel.setText("Publisher Name:");
 
-        jLabel80.setText("Publisher Info:");
+        descriptionLabel.setText("Description:");
 
-        jLabel81.setText("Description:");
+        bookPriceLabel.setText("Book Price:");
 
-        jLabel82.setText("Book Price:");
+        keywordsLabel.setText("Keywords:");
 
-        jLabel83.setText("Keywords:");
+        descriptionCharactersLimitLabel.setText("(max. 4000 characters)");
 
-        jLabel84.setText("(max. 4000 characters)");
+        bookPriceCurrencyLabel.setText("In Rupiah");
 
-        jLabel85.setText("(Min. $1.00)");
+        bindingLabel.setText("Binding:");
 
-        jLabel86.setText("Binding:");
+        signatureLabel.setText("Signature:");
 
-        jLabel87.setText("Item Condition:");
+        signatureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Signed", "Not Signed" }));
 
-        jLabel88.setText("Signature:");
+        bindingComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hard Cover", "Paperback" }));
 
-        jLabel89.setText("Dust Jacket:");
+        categoryLabel.setText("Category:");
 
-        jLabel90.setText("Edition:");
-
-        jLabel91.setText("Catalog:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel92.setText("New Catalog:");
-
-        jButton36.setText("Add Catalog");
-
-        jCheckBox5.setText("Unlimited Quantity");
+        categoryField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AdminAddBookPanelLayout = new javax.swing.GroupLayout(AdminAddBookPanel);
         AdminAddBookPanel.setLayout(AdminAddBookPanelLayout);
@@ -1373,184 +1391,141 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel76)
+                        .addComponent(isbnLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(isbnField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel77)
+                        .addComponent(authorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel79)
+                        .addComponent(bookTitleLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bookTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel80)
+                        .addComponent(publishedNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(publisherNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel81)
+                            .addComponent(descriptionLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel84)
-                                .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(descriptionCharactersLimitLabel)
+                                .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel82)
+                                .addComponent(bookPriceLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bookPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel85))
+                                .addComponent(bookPriceCurrencyLabel))
                             .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel83)
+                                .addComponent(keywordsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(keywordsField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel78)
+                        .addComponent(publishedYearLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel91)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel86)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel87)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel89)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel90)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel88)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel92)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField48, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton36))))
+                        .addComponent(publishedYearField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
+                            .addComponent(AdminSubmitBook, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(75, 75, 75))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
+                            .addComponent(bindingLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(bindingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
+                            .addComponent(signatureLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
+                        .addComponent(categoryLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(categoryField)))
                 .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminAddBookPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AdminAddBookPanelTitle, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminAddBookPanelLayout.createSequentialGroup()
                         .addGap(109, 109, 109)
-                        .addComponent(jLabel73)))
+                        .addComponent(AdminAddBookPanelSubtitle)))
                 .addGap(198, 198, 198))
             .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel74)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel75)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox5)
+                .addGap(68, 68, 68)
+                .addComponent(bookQuantityLabel)
+                .addGap(18, 18, 18)
+                .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AdminAddBookPanelLayout.setVerticalGroup(
             AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel72)
+                .addComponent(AdminAddBookPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel73)
+                .addComponent(AdminAddBookPanelSubtitle)
                 .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel86)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bindingLabel)
+                            .addComponent(bindingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel87)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel91)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
-                                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel89)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel90)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel88)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(signatureLabel)
+                            .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel92)
-                            .addComponent(jTextField48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton36)
+                            .addComponent(categoryLabel)
+                            .addComponent(categoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AdminSubmitBook, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))
                     .addGroup(AdminAddBookPanelLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel74)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel75)
-                            .addComponent(jCheckBox5))
+                            .addComponent(bookQuantityLabel)
+                            .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel76)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(isbnLabel)
+                            .addComponent(isbnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel77)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(authorLabel)
+                            .addComponent(authorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel79)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bookTitleLabel)
+                            .addComponent(bookTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel80)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(publishedNameLabel)
+                            .addComponent(publisherNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel78)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(publishedYearLabel)
+                            .addComponent(publishedYearField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel82)
-                            .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel85))
+                            .addComponent(bookPriceLabel)
+                            .addComponent(bookPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bookPriceCurrencyLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel83)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(keywordsLabel)
+                            .addComponent(keywordsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(AdminAddBookPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel81))
+                            .addComponent(descriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel84)
+                        .addComponent(descriptionCharactersLimitLabel)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -1719,7 +1694,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         CustomerSignUpPanelLayout.setHorizontalGroup(
             CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerSignUpPanelLayout.createSequentialGroup()
-                .addGap(0, 212, Short.MAX_VALUE)
+                .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(CustomerSignUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(CustomerSignUpPanelLayout.createSequentialGroup()
@@ -1895,7 +1870,7 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                     .addComponent(customerCreditCardYearField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(customerSignUpSubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         CustomerSignUpScrollPane.setViewportView(CustomerSignUpPanel);
@@ -1930,11 +1905,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(AdminCustomersListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
                     .addGap(20, 20, 20)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(AdminSignUpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
-                    .addGap(25, 25, 25)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -1989,11 +1959,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(AdminSignUpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
-                    .addGap(12, 12, 12)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(CustomerLoginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1434, Short.MAX_VALUE)
                     .addGap(15, 15, 15)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2025,7 +1990,6 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         AdminTransactionsListPanel.setVisible(false);
         AdminBooksListPanel.setVisible(false);
         AdminCustomersListPanel.setVisible(false);
-        AdminSignUpPanel.setVisible(false);
         CustomerLoginPanel.setVisible(false);
         CustomerSignUpScrollPane.setVisible(false);
         CustomerSignUpPanel.setVisible(false);
@@ -2043,33 +2007,20 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
        CustomerLoginPanel.setVisible(true);
     }//GEN-LAST:event_adminUsernameFieldActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void adminTransactionsListLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminTransactionsListLogoutButtonActionPerformed
+        this.hideAllPanel();
+        UserChoicePanel.setVisible(true);
+    }//GEN-LAST:event_adminTransactionsListLogoutButtonActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void adminBooksListLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBooksListLogoutButtonActionPerformed
+        this.hideAllPanel();
+        UserChoicePanel.setVisible(true);
+    }//GEN-LAST:event_adminBooksListLogoutButtonActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    private void adminCustomersListLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCustomersListLogoutButtonActionPerformed
+        this.hideAllPanel();
+        UserChoicePanel.setVisible(true);
+    }//GEN-LAST:event_adminCustomersListLogoutButtonActionPerformed
 
     private void customerUsernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerUsernameFieldActionPerformed
         // TODO add your handling code here:
@@ -2131,13 +2082,10 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_customerCreditCardYearFieldActionPerformed
 
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton24ActionPerformed
-
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton25ActionPerformed
+    private void customerMainMenuLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerMainMenuLogoutButtonActionPerformed
+        this.hideAllPanel();
+        UserChoicePanel.setVisible(true);
+    }//GEN-LAST:event_customerMainMenuLogoutButtonActionPerformed
 
     private void jTextField26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField26ActionPerformed
         // TODO add your handling code here:
@@ -2214,13 +2162,9 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private void adminMenuBooksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuBooksButtonActionPerformed
         this.hideAllPanel();
         AdminBooksListPanel.setVisible(true);
-    }//GEN-LAST:event_adminMenuBooksButtonActionPerformed
-
-    private void adminSignUpOptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminSignUpOptionButtonActionPerformed
-        this.hideAllPanel();
-        AdminSignUpPanel.setVisible(true);
+        this.displayAdminBookList();
         
-    }//GEN-LAST:event_adminSignUpOptionButtonActionPerformed
+    }//GEN-LAST:event_adminMenuBooksButtonActionPerformed
 
     private void adminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginButtonActionPerformed
         String username = adminUsernameField.getText();
@@ -2257,6 +2201,8 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
                 if (customerChecked.getPassword().equals(password)) {
                     this.hideAllPanel();
                     CustomerMainMenuPanel.setVisible(true);
+                    this.displayCustomerBookList();
+                    currentCustomer = DAO.searchCustomer(username);
                 }
                 else {
                     customerUsernameField.setText("");
@@ -2323,12 +2269,122 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private void adminMenuCustomersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuCustomersButtonActionPerformed
         this.hideAllPanel();
         AdminCustomersListPanel.setVisible(true);
+        this.displayAdminCustomerList();
     }//GEN-LAST:event_adminMenuCustomersButtonActionPerformed
 
     private void adminMenuTransactionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminMenuTransactionsButtonActionPerformed
         this.hideAllPanel();
         AdminTransactionsListPanel.setVisible(true);
+        this.displayAdminTransactionList();
     }//GEN-LAST:event_adminMenuTransactionsButtonActionPerformed
+
+    private void addBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookButtonActionPerformed
+        this.hideAllPanel();
+        AdminAddBookPanel.setVisible(true);
+    }//GEN-LAST:event_addBookButtonActionPerformed
+
+    private void categoryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryFieldActionPerformed
+
+    private void AdminSubmitBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminSubmitBookActionPerformed
+        Book book = new Book();
+
+        book.setAuthor(authorField.getText());
+        book.setTitle(bookTitleField.getText());
+        book.setIsbn(isbnField.getText());
+
+        long price = Long.valueOf(bookPriceField.getText());
+        book.setPrice(price);
+
+        long quantity = Long.valueOf(quantityField.getText());
+        book.setQuantity(quantity);
+
+        book.setPublisherName(publisherNameField.getText());
+
+        int yearPublished = Integer.parseInt(publishedYearField.getText());
+        book.setYearPublished(yearPublished);
+
+        book.setDescription(descriptionField.getText());
+
+        String bookBinding = (String) bindingComboBox.getSelectedItem();
+        if (bookBinding.equalsIgnoreCase("paperback")) {
+           book.setBinding(Binding.PAPERBACK);
+        }
+        if (bookBinding.equalsIgnoreCase("hard cover")) {
+           book.setBinding(Binding.HARDCOVER);
+        }
+
+
+        String bookSignature = (String) signatureComboBox.getSelectedItem();
+        if (bookSignature.equalsIgnoreCase("signed")) {
+           book.setSigned(Signed.SIGNED);
+        }
+        if (bookSignature.equalsIgnoreCase("not signed")) {
+                book.setSigned(Signed.NOTSIGNED);
+        }
+
+
+        book.setKeywords(Arrays.asList(keywordsField.getText()));
+        book.setCategory(Arrays.asList(categoryField.getText()));
+        DAO.addBook(book);
+        this.hideAllPanel();
+        AdminBooksListPanel.setVisible(true);
+        this.displayAdminBookList();
+
+    }//GEN-LAST:event_AdminSubmitBookActionPerformed
+
+    private void adminBooksListMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBooksListMenuButtonActionPerformed
+        this.hideAllPanel();
+        AdminMenuPanel.setVisible(true);
+    }//GEN-LAST:event_adminBooksListMenuButtonActionPerformed
+
+    private void AdminDeleteBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminDeleteBookButtonActionPerformed
+        String deletedBookIsbn = isbnToDeleteField.getText();
+        DAO.deleteBook(deletedBookIsbn);
+        isbnToDeleteField.setText("");
+        this.displayAdminBookList();
+    }//GEN-LAST:event_AdminDeleteBookButtonActionPerformed
+
+    private void isbnToDeleteFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isbnToDeleteFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_isbnToDeleteFieldActionPerformed
+
+    private void adminTransactionsListMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminTransactionsListMenuButtonActionPerformed
+        this.hideAllPanel();
+        AdminMenuPanel.setVisible(true);
+    }//GEN-LAST:event_adminTransactionsListMenuButtonActionPerformed
+
+    private void adminCustomersListMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCustomersListMenuButtonActionPerformed
+        this.hideAllPanel();
+        AdminMenuPanel.setVisible(true);
+    }//GEN-LAST:event_adminCustomersListMenuButtonActionPerformed
+
+    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
+        String isbnOfBookPurchased = customerIsbnChoiceField.getText();
+        Book bookInvolved = DAO.searchBook(isbnOfBookPurchased);
+        PurchaseStatus thisPurchaseStatus = currentCustomer.purchaseBook(bookInvolved);
+        purchasingStatusLabel.setText("Status : "+ thisPurchaseStatus.value());
+        Date currentDate = new Date();
+        Transaction currentTransaction = new Transaction();
+        currentTransaction.setTransactionId(DAO.numberOfTransaction()+1);
+        currentTransaction.setCustomerId(currentCustomer.getUserId());
+        currentTransaction.setIsbn(bookInvolved.getIsbn());
+        currentTransaction.setQuantity(1);
+        currentTransaction.setDate(currentDate);
+        if (thisPurchaseStatus== PurchaseStatus.success)
+        {
+            DAO.replaceBookData(bookInvolved);
+            DAO.replaceCustomerData(currentCustomer);
+            currentTransaction.setPaymentVerification(true);
+        }
+        else {
+           currentTransaction.setPaymentVerification(false);
+        }
+        // Add currentTransaction to transaction.xml
+        DAO.addTransaction(currentTransaction);
+        this.displayCustomerBookList();
+    }//GEN-LAST:event_purchaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2368,20 +2424,40 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AccountInfoLabel;
     private javax.swing.JPanel AdminAddBookPanel;
+    private javax.swing.JLabel AdminAddBookPanelSubtitle;
+    private javax.swing.JLabel AdminAddBookPanelTitle;
+    private javax.swing.JLabel AdminBooksListISBNLabel;
     private javax.swing.JPanel AdminBooksListPanel;
+    private javax.swing.JLabel AdminBooksListPanelSubtitle;
+    private javax.swing.JLabel AdminBooksListPanelTitle;
     private javax.swing.JPanel AdminCustomersListPanel;
+    private javax.swing.JLabel AdminCustomersListPanelSubtitle;
+    private javax.swing.JLabel AdminCustomersListPanelTitle;
+    private javax.swing.JButton AdminDeleteBookButton;
     private javax.swing.JPanel AdminLoginPanel;
     private javax.swing.JPanel AdminMenuPanel;
-    private javax.swing.JPanel AdminSignUpPanel;
+    private javax.swing.JButton AdminSubmitBook;
     private javax.swing.JPanel AdminTransactionsListPanel;
+    private javax.swing.JLabel AdminTransactionsListPanelSubtitle;
+    private javax.swing.JLabel AdminTransactionsListPanelTitle;
     private javax.swing.JPanel CustomerEditProfilePanel;
+    private javax.swing.JLabel CustomerISBNChoiceLabel;
     private javax.swing.JPanel CustomerLoginPanel;
     private javax.swing.JPanel CustomerMainMenuPanel;
+    private javax.swing.JLabel CustomerMainMenuPanelSubtitle;
+    private javax.swing.JLabel CustomerMainMenuPanelTitle;
     private javax.swing.JPanel CustomerSignUpPanel;
     private javax.swing.JScrollPane CustomerSignUpScrollPane;
     private javax.swing.JLabel PersonalProfileLabel;
     private javax.swing.JPanel UserChoicePanel;
+    private javax.swing.JButton addBookButton;
+    private javax.swing.JTable adminBookTable;
+    private javax.swing.JButton adminBooksListLogoutButton;
+    private javax.swing.JButton adminBooksListMenuButton;
     private javax.swing.JButton adminButton;
+    private javax.swing.JTable adminCustomerTable;
+    private javax.swing.JButton adminCustomersListLogoutButton;
+    private javax.swing.JButton adminCustomersListMenuButton;
     private javax.swing.JButton adminLoginButton;
     private javax.swing.JLabel adminLoginPanelSubtitle;
     private javax.swing.JLabel adminLoginPanelTitle;
@@ -2392,15 +2468,30 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JButton adminMenuTransactionsButton;
     private javax.swing.JPasswordField adminPasswordField;
     private javax.swing.JLabel adminPasswordLabel;
-    private javax.swing.JButton adminSignUpOptionButton;
+    private javax.swing.JTable adminTransactionTable;
+    private javax.swing.JButton adminTransactionsListLogoutButton;
+    private javax.swing.JButton adminTransactionsListMenuButton;
     private javax.swing.JTextField adminUsernameField;
     private javax.swing.JLabel adminUsernameLabel;
+    private javax.swing.JTextField authorField;
+    private javax.swing.JLabel authorLabel;
+    private javax.swing.JComboBox bindingComboBox;
+    private javax.swing.JLabel bindingLabel;
+    private javax.swing.JLabel bookPriceCurrencyLabel;
+    private javax.swing.JTextField bookPriceField;
+    private javax.swing.JLabel bookPriceLabel;
+    private javax.swing.JLabel bookQuantityLabel;
+    private javax.swing.JTextField bookTitleField;
+    private javax.swing.JLabel bookTitleLabel;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField categoryField;
+    private javax.swing.JLabel categoryLabel;
     private javax.swing.JLabel creditCardProfileLabel;
     private javax.swing.JPasswordField customerAccountPasswordField;
     private javax.swing.JLabel customerAccountPasswordLabel;
     private javax.swing.JTextField customerAccountUsernameField;
     private javax.swing.JLabel customerAccountUsernameLabel;
+    private javax.swing.JTable customerBookTable;
     private javax.swing.JButton customerButton;
     private javax.swing.JTextField customerCityField;
     private javax.swing.JLabel customerCityLabel;
@@ -2422,11 +2513,13 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel customerFirstNameLabel;
     private javax.swing.JComboBox customerGenderComboBoxes;
     private javax.swing.JLabel customerGenderLabel;
+    private javax.swing.JTextField customerIsbnChoiceField;
     private javax.swing.JTextField customerLastNameField;
     private javax.swing.JLabel customerLastNameLabel;
     private javax.swing.JButton customerLoginButton;
     private javax.swing.JLabel customerLoginPanelSubtitle;
     private javax.swing.JLabel customerLoginPanelTitle;
+    private javax.swing.JButton customerMainMenuLogoutButton;
     private javax.swing.JPasswordField customerPasswordField;
     private javax.swing.JLabel customerPasswordLabel;
     private javax.swing.JTextField customerPhoneNumberField;
@@ -2442,49 +2535,16 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel customerUsernameLabel;
     private javax.swing.JTextField customerZipCodeField;
     private javax.swing.JLabel customerZipCodeLabel;
+    private javax.swing.JLabel descriptionCharactersLimitLabel;
+    private javax.swing.JTextField descriptionField;
+    private javax.swing.JLabel descriptionLabel;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
+    private javax.swing.JTextField isbnField;
+    private javax.swing.JLabel isbnLabel;
+    private javax.swing.JTextField isbnToDeleteField;
     private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
@@ -2506,39 +2566,17 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
-    private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel82;
-    private javax.swing.JLabel jLabel83;
-    private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel86;
-    private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
-    private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
-    private javax.swing.JPasswordField jPasswordField5;
-    private javax.swing.JPasswordField jPasswordField6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
@@ -2549,17 +2587,19 @@ public class PicadillyBookstoreGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField37;
     private javax.swing.JTextField jTextField38;
     private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField42;
     private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField keywordsField;
+    private javax.swing.JLabel keywordsLabel;
+    private javax.swing.JLabel publishedNameLabel;
+    private javax.swing.JTextField publishedYearField;
+    private javax.swing.JLabel publishedYearLabel;
+    private javax.swing.JTextField publisherNameField;
+    private javax.swing.JButton purchaseButton;
+    private javax.swing.JLabel purchasingStatusLabel;
+    private javax.swing.JTextField quantityField;
+    private javax.swing.JComboBox signatureComboBox;
+    private javax.swing.JLabel signatureLabel;
     private javax.swing.JLabel userChoicePanelTitle;
     // End of variables declaration//GEN-END:variables
 }

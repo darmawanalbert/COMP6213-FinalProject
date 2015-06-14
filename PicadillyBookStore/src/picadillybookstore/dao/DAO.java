@@ -53,22 +53,19 @@ public class DAO {
         return bookListReturned;
     }
     
-    public static Books searchBook(String input)
+    public static Book searchBook(String isbn)
     {
         Books bookCollection = (Books) DAO.getAllBooks();
-        Books bookListReturned = null;
-        String bookTitle;
-        input = input.toLowerCase();
+        Book bookReturned = null;
         // sequential search. Complexity : O(n)
         for (Book bookChecked : bookCollection.getBooks())
         {
-            bookTitle = bookChecked.getTitle().toLowerCase();
-            if (bookTitle.contains(input))
+            if (bookChecked.getIsbn().equals(isbn))
             {
-                bookListReturned.getBooks().add(bookChecked);
+                bookReturned = bookChecked;
             }
         }
-        return bookListReturned;
+        return bookReturned;
     }
     
     public static void addBook(Book bookAdded)
@@ -97,17 +94,19 @@ public class DAO {
     public static void deleteBook(String isbn)
     {
         Books bookCollection = (Books) DAO.getAllBooks();
+        Books newBookCollection = new Books();
+        newBookCollection.setBooks(new ArrayList<Book>());
         try {
             File bookFile = new File("book.xml");
             // Marshaling
-            int loopCounter = 0;
+            
             for (Book bookChecked : bookCollection.getBooks())
             {
-                if (bookChecked.getIsbn().equals(isbn))
+                if (!(bookChecked.getIsbn().equals(isbn)))
                 {
-                    bookCollection.getBooks().remove(loopCounter);
+                    newBookCollection.getBooks().add(bookChecked);
                 }
-                loopCounter++;
+                
             }
             JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -115,7 +114,7 @@ public class DAO {
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
  
-            jaxbMarshaller.marshal(bookCollection, bookFile);
+            jaxbMarshaller.marshal(newBookCollection, bookFile);
         }
         catch (JAXBException e)
         {
@@ -188,24 +187,22 @@ public class DAO {
         return customerListReturned;
     }
     
-    public static Customers searchCustomer(String input)
+    public static Customer searchCustomer(String username)
     {
         Customers customerList = (Customers) DAO.getAllCustomers();
-        Customers customerListReturned = null;
+        Customer customerReturned = null;
         // sequential search. Complexity : O(n)
-        long inputLong = Long.valueOf(input);
-        input = input.toLowerCase();
-        String customerName;
+        
         for (Customer customerChecked : customerList.getCustomers())
         {
-            customerName = customerChecked.getName().toLowerCase();
-            if (customerChecked.getUserId() == inputLong || customerName.contains(input))
+            if (customerChecked.getUsername().equals(username))
             {
-                customerListReturned.getCustomers().add(customerChecked);
+                customerReturned = customerChecked;
             }
         }
-        return customerListReturned;
+        return customerReturned;
     }
+    
     public static void addCustomer(Customer customerAdded)
     {
         Customers customerList = (Customers) DAO.getAllCustomers();
@@ -369,5 +366,15 @@ public class DAO {
         {
             System.out.println("JAXB error,  " + e.getMessage() );
         }
+    }
+    
+    public static long numberOfTransaction() {
+        Transactions transactionCollection = (Transactions) DAO.getAllTransactions();
+        long transactionCount = 0;
+        for (Transaction transactionChecked : transactionCollection.getTransactions())
+        {
+            transactionCount++;
+        }
+        return transactionCount;
     }
 }

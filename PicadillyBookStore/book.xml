@@ -28,7 +28,7 @@
         <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">entertainment</keywords>
         <price>134477</price>
         <publisherName>Harper &amp; Brothers Publishers</publisherName>
-        <quantity>7</quantity>
+        <quantity>4</quantity>
         <signed>NOTSIGNED</signed>
         <title>The Royal Road to Card Magic</title>
         <yearPublished>2011</yearPublished>
@@ -44,7 +44,7 @@
         <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">work</keywords>
         <price>171770</price>
         <publisherName>Little, Brown and Company</publisherName>
-        <quantity>10</quantity>
+        <quantity>8</quantity>
         <signed>NOTSIGNED</signed>
         <title>Are You Smart Enough to Work at Google?</title>
         <yearPublished>2012</yearPublished>
