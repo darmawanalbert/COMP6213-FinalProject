@@ -9,10 +9,11 @@ package picadillybookstore.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
 
 @XmlRootElement(name="book")
 public class Book {
@@ -50,6 +51,9 @@ public class Book {
         this.category = category;
     }
     
+    public Book()
+    {
+    }
     //----------------------------------
     // Accessor methods.
     //----------------------------------
@@ -116,15 +120,6 @@ public class Book {
         this.title = title;
     }
 
-    /**
-     *
-     * @param isbn
-     */
-    @XmlAttribute
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-    
     @XmlElement
     public void setPrice(long price) {
         this.price = price;
@@ -165,10 +160,16 @@ public class Book {
         this.keywords = keywords;
     }
 
-    @XmlElement
+   @XmlElement
     public void setCategory(List category) {
         this.category = category;
     }
+    
+    @XmlAttribute
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    
     //-----------------------------
     // Business logic methods.
     //-----------------------------

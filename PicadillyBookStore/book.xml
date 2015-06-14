@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<books>
+    <book isbn="978-0-349-40137-9">
+        <author>George Berkowski</author>
+        <binding>PAPERBACK</binding>
+        <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</category>
+        <description>An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start</description>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">app</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">startup</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">technology</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mobile</keywords>
+        <price>246221</price>
+        <publisherName>Little, Brown Book Group</publisherName>
+        <quantity>1</quantity>
+        <signed>NOTSIGNED</signed>
+        <title>How to Build A Billion Dollar App</title>
+        <yearPublished>2015</yearPublished>
+    </book>
+    <book isbn="978-1-936759-01-9">
+        <author>Jean Hugard &amp; Frederick Braue</author>
+        <binding>PAPERBACK</binding>
+        <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">entertainment</category>
+        <description>With the help of this book, anyone can develop a versatile repertoire of first-rate card tricks. In fact, mastery of just the first chapter will enable you to perform a half-dozen astounding and entertaining sleights of hand. This exciting introduction to card conjuring will enable even beginners to develop professional-level skill and the ability to perform tricks guaranteed to astound family and friends.</description>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">card</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">magic</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">houdini</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">entertainment</keywords>
+        <price>134477</price>
+        <publisherName>Harper &amp; Brothers Publishers</publisherName>
+        <quantity>7</quantity>
+        <signed>NOTSIGNED</signed>
+        <title>The Royal Road to Card Magic</title>
+        <yearPublished>2011</yearPublished>
+    </book>
+    <book isbn="978-0-316-09997-4">
+        <author>William Poundstone</author>
+        <binding>PAPERBACK</binding>
+        <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">career</category>
+        <description>Trick Questions, Zen-like Riddles, Insanely Difficult Puzzles, and Other Devious Interviewing Techniques You Need to Know to Get a Job Anywhere in the New Economy</description>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">google</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">smart</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">intelligence</keywords>
+        <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">work</keywords>
+        <price>171770</price>
+        <publisherName>Little, Brown and Company</publisherName>
+        <quantity>10</quantity>
+        <signed>NOTSIGNED</signed>
+        <title>Are You Smart Enough to Work at Google?</title>
+        <yearPublished>2012</yearPublished>
+    </book>
+</books>

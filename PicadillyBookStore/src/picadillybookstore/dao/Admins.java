@@ -9,24 +9,29 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import picadillybookstore.domain.Book;
+import picadillybookstore.domain.Admin;
 /**
  *
  * @author  Albert Darmawan
  * @version 1.0
  * @since   2015-06-13
  */
-@XmlRootElement(name="books")
+@XmlRootElement(name="admins")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Books {
-    @XmlElement(name="book")
-    private List<Book> books = null;
-    public List<Book> getBooks()
+public class Admins {
+    @XmlElement(name="admin")
+    private List<Admin> admins = null;
+
+    /**
+     *
+     * @return
+     */
+    public List<Admin> getAdmins()
     {
-        return books;
+        return admins;
     }
-    public void setBooks(List<Book> books)
+    public void setAdmins(List<Admin> admins)
     {
-        this.books  =books;
+        this.admins  =admins;
     }
 }

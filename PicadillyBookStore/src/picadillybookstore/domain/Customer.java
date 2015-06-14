@@ -8,8 +8,12 @@ package picadillybookstore.domain;
 */
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
-public class Customer extends User{
+@XmlRootElement(name="customer")
+public class Customer {
     //------------
     // Constant(s).
     //------------
@@ -17,6 +21,14 @@ public class Customer extends User{
     //------------
     // Attributes.
     //------------
+    
+    private long userId;
+    private String name;
+    private Gender gender;
+    private String username;
+    private String password;
+    private String email;
+    private String phoneNumber;
     private int numberOfPurchase;
     private String streetAddress;
     private String city;
@@ -31,8 +43,9 @@ public class Customer extends User{
     //----------------
     // Constructor(s).
     //----------------
-    private String getZipCode;
-
+    public Customer() {
+          
+     }
     /**
      *
      * @param userId
@@ -52,29 +65,61 @@ public class Customer extends User{
      * @param cvc
      * @param creditCardMonth
      * @param creditCardYear
+     * @param getZipCode
      */
-     public Customer(long userId, String name, 
-                Gender gender, String username, 
-                String password, String email, 
-                String phoneNumber, int numberOfPurchase, String streetAddress,
-                String city, String zipCode, String country, String creditCardName,
-                String creditCardNo, String cvc, String creditCardMonth, String creditCardYear)
-    {
-        super(userId,name,gender,username,password,email,phoneNumber);
-        this.setNumberOfPurchase(numberOfPurchase);
-        this.setStreetAddress(streetAddress);
-        this.setCity(city);
-        this.setZipCode(zipCode);
-        this.setCountry(country);
-        this.setCreditCardName(creditCardName);
-        this.setCreditCardNo(creditCardNo);
-        this.setCvc(cvc);
-        this.setCreditCardMonth(creditCardMonth);
-        this.setCreditCardYear(creditCardYear);           
+    public Customer(long userId, String name, Gender gender, String username, String password, String email, String phoneNumber, int numberOfPurchase, String streetAddress, String city, String zipCode, String country, String creditCardName, String creditCardNo, String cvc, String creditCardMonth, String creditCardYear) {
+        this.userId = userId;
+        this.name = name;
+        this.gender = gender;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.numberOfPurchase = numberOfPurchase;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.country = country;
+        this.creditCardName = creditCardName;
+        this.creditCardNo = creditCardNo;
+        this.cvc = cvc;
+        this.creditCardMonth = creditCardMonth;
+        this.creditCardYear = creditCardYear;
     }
+    
+    
+
     //----------------------------------
     // Accessor methods.
     //----------------------------------
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getPhoneNumber() {    
+        return phoneNumber;
+    }
+
     public int getNumberOfPurchase() {
         return numberOfPurchase;
     }
@@ -119,49 +164,97 @@ public class Customer extends User{
         return purchasedBook;
     }    
     
+    
+
     //----------------------------------
     // Mutator methods.
     //----------------------------------
+    @XmlAttribute
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+    
+    @XmlElement
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    @XmlElement
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+    
+    @XmlElement
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @XmlElement
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @XmlElement
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    @XmlElement
+    public void setPhoneNumber(String phoneNumber) {    
+        this.phoneNumber = phoneNumber;
+    }
+    
+    @XmlElement
     public void setNumberOfPurchase(int numberOfPurchase) {
         this.numberOfPurchase = numberOfPurchase;
     }
-
+    
+    @XmlElement
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
-
+    
+    @XmlElement
     public void setCity(String city) {
         this.city = city;
     }
-
+    
+    @XmlElement
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-
+    
+    @XmlElement
     public void setCountry(String country) {
         this.country = country;
     }
-
+    
+    @XmlElement
     public void setCreditCardName(String creditCardName) {
         this.creditCardName = creditCardName;
     }
-
+    
+    @XmlElement
     public void setCreditCardNo(String creditCardNo) {
         this.creditCardNo = creditCardNo;
     }
-
+    
+    @XmlElement
     public void setCvc(String cvc) {
         this.cvc = cvc;
     }
-
+    
+    @XmlElement
     public void setCreditCardMonth(String creditCardMonth) {
         this.creditCardMonth = creditCardMonth;
     }
-
+    
+    @XmlElement
     public void setCreditCardYear(String creditCardYear) {
         this.creditCardYear = creditCardYear;
     } 
     
+    @XmlElement
     public void setPurchasedBook(ArrayList<Book> purchasedBook) {
         this.purchasedBook = purchasedBook;
     }
@@ -191,7 +284,7 @@ public class Customer extends User{
         return (sum % 10 == 0);
     }
     
-    public PurchaseStatus purchaseBook(Book bookBeingPurchased)
+    public boolean isCreditCardNotExpired()
     {
         Calendar currentTime = Calendar.getInstance();
         int currentYear = currentTime.get(Calendar.YEAR);
@@ -199,9 +292,32 @@ public class Customer extends User{
         String creditCardYearFourDigit = "20"+this.getCreditCardYear();
         int creditCardYearInteger = Integer.parseInt(creditCardYearFourDigit);
         int creditCardMonthInteger = Integer.parseInt(this.getCreditCardMonth());
+        if (currentMonth<=creditCardMonthInteger)
+        {
+            if (currentYear<=creditCardYearInteger) {
+                return true;
+            }
+            else {
+                return false;
+            }
+            
+        }
+        else {
+            if (currentYear<=creditCardYearInteger) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    
+    public PurchaseStatus purchaseBook(Book bookBeingPurchased)
+    {
+        
         if (bookBeingPurchased.getQuantity()!=0)
         {
-            if (currentMonth<=creditCardMonthInteger && currentYear<=creditCardYearInteger && isCreditCardNumberValid())
+            if (isCreditCardNotExpired() && isCreditCardNumberValid())
             {
                 bookBeingPurchased.quantity-=1;
                 this.setNumberOfPurchase(this.getNumberOfPurchase()+1);

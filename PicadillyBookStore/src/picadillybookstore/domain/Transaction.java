@@ -1,13 +1,19 @@
 package picadillybookstore.domain;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author Matthew Kharli
  * @version 1.0
  * @since 2015-5-28
  */
-public class Transaction{
+
+@XmlRootElement(name="transaction")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Transaction {
     
  
     //------------
@@ -24,6 +30,11 @@ public class Transaction{
     //----------------
     // Constructor(s).
     //----------------
+    public Transaction()
+    {
+        
+    }
+    
     public Transaction(long transactionId, long customerId, String isbn, long quantity, Date date, boolean paymentVerification) {
         this.transactionId = transactionId;
         this.customerId = customerId;
@@ -33,7 +44,7 @@ public class Transaction{
         this.paymentVerification = paymentVerification;
     }    
     
-
+    
     //----------------------------------
     // Accessor methods.
     //----------------------------------
@@ -62,27 +73,35 @@ public class Transaction{
     //----------------------------------
     // Mutator methods.
     //----------------------------------
-    public void setTransactionId(long transactionId) {
-        this.transactionId = transactionId;
-    }
+    
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
+    
+   
     public void setIsbn(String isbn){
         this.isbn = isbn;
     }
+    
+    
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
-
+    
+    
     public void setDate(Date date) {
         this.date = (Date) date.clone();
     }
     
+    
     public void setPaymentVerification(boolean paymentVerification) {
         this.paymentVerification = paymentVerification;
     }
- 
+    
+    
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
+    }
     
     //-----------------------------
     // Business logic methods.
@@ -96,7 +115,6 @@ public class Transaction{
     {
         System.out.println("Transaction ID       : " + this.getTransactionId());
         System.out.println("Customer ID          : " + this.getCustomerId());
-        System.out.println("Customer Name        : " + this.getTransactionId());
         System.out.println("ISBN                 : " + this.getIsbn());
         System.out.println("Quantity             : " + this.getQuantity());
         System.out.println("Date                 : " + this.getDate());

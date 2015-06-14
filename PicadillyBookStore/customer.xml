@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+    <customer userId="1">
+        <NUMBER_OF_CREDIT_CARD_SUBSTRING>4</NUMBER_OF_CREDIT_CARD_SUBSTRING>
+        <city>Tangerang Selatan</city>
+        <country>Indonesia</country>
+        <creditCardMonth>05</creditCardMonth>
+        <creditCardName>Albert Darmawan</creditCardName>
+        <creditCardNo>1010202010101010</creditCardNo>
+        <creditCardYear>18</creditCardYear>
+        <cvc>145</cvc>
+        <email>darmawanalbert@yahoo.com</email>
+        <gender>MALE</gender>
+        <name>Albert Darmawan</name>
+        <numberOfPurchase>3</numberOfPurchase>
+        <password>123456</password>
+        <phoneNumber>081281123450</phoneNumber>
+        <purchasedBook isbn="978-0-349-40137-9">
+            <author>George Berkowski</author>
+            <binding>PAPERBACK</binding>
+            <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</category>
+            <description>An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start</description>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">app</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">startup</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">technology</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mobile</keywords>
+            <price>246221</price>
+            <publisherName>Little, Brown Book Group</publisherName>
+            <quantity>3</quantity>
+            <signed>NOTSIGNED</signed>
+            <title>How to Build A Billion Dollar App</title>
+            <yearPublished>2015</yearPublished>
+        </purchasedBook>
+        <purchasedBook isbn="978-0-349-40137-9">
+            <author>George Berkowski</author>
+            <binding>PAPERBACK</binding>
+            <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</category>
+            <description>An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start</description>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">app</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">startup</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">technology</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mobile</keywords>
+            <price>246221</price>
+            <publisherName>Little, Brown Book Group</publisherName>
+            <quantity>2</quantity>
+            <signed>NOTSIGNED</signed>
+            <title>How to Build A Billion Dollar App</title>
+            <yearPublished>2015</yearPublished>
+        </purchasedBook>
+        <purchasedBook isbn="978-0-349-40137-9">
+            <author>George Berkowski</author>
+            <binding>PAPERBACK</binding>
+            <category xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</category>
+            <description>An accessible, step-by-step guide to building an app-based business—essential reading for anyone who has an idea for an app, but is unsure of where to start</description>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">app</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">business</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">startup</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">technology</keywords>
+            <keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mobile</keywords>
+            <price>246221</price>
+            <publisherName>Little, Brown Book Group</publisherName>
+            <quantity>1</quantity>
+            <signed>NOTSIGNED</signed>
+            <title>How to Build A Billion Dollar App</title>
+            <yearPublished>2015</yearPublished>
+        </purchasedBook>
+        <streetAddress>Jalan Citandui 1 Taman Tirta Golf</streetAddress>
+        <username>darmawanalbert</username>
+        <zipCode>15310</zipCode>
+    </customer>
+    <customer userId="2">
+        <NUMBER_OF_CREDIT_CARD_SUBSTRING>4</NUMBER_OF_CREDIT_CARD_SUBSTRING>
+        <city>Pleasant Hill</city>
+        <country>USA</country>
+        <creditCardMonth>10</creditCardMonth>
+        <creditCardName>Matthew Kharli</creditCardName>
+        <creditCardNo>1010001011110100</creditCardNo>
+        <creditCardYear>10</creditCardYear>
+        <cvc>010</cvc>
+        <email>matthewk@gmail.com</email>
+        <gender>MALE</gender>
+        <name>Matthew Kharli</name>
+        <numberOfPurchase>0</numberOfPurchase>
+        <password>098765</password>
+        <phoneNumber>08119001771</phoneNumber>
+        <streetAddress>715 Slater Avenue</streetAddress>
+        <username>matthewk</username>
+        <zipCode>94523</zipCode>
+    </customer>
+</customers>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<admins>
+    <admin userId="3">
+        <email>tabudi@gmail.com</email>
+        <gender>MALE</gender>
+        <name>Tri Asih Budiono</name>
+        <password>ouch</password>
+        <phoneNumber>085632456732</phoneNumber>
+        <username>tabudi</username>
+    </admin>
+    <admin userId="4">
+        <email>elbertcl@yahoo.com</email>
+        <gender>MALE</gender>
+        <name>Elbert Christopher Larosa</name>
+        <password>bejo</password>
+        <phoneNumber>0818833551</phoneNumber>
+        <username>elbert</username>
+    </admin>
+</admins>
