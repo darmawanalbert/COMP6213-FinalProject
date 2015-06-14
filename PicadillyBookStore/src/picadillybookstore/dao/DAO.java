@@ -266,6 +266,16 @@ public class DAO {
             
         }
     }
+    public static long numberOfCustomers()
+    {
+        Customers customerCollection = (Customers) DAO.getAllCustomers();
+        long customerCount = 0;
+        for (Customer customerChecked : customerCollection.getCustomers())
+        {
+            customerCount++;
+        }
+        return customerCount;
+    }
     //----------------
     // Admin-related functions
     //----------------
